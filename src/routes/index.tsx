@@ -1,0 +1,23 @@
+import { Switch, Route } from "react-router-dom";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
+import Dashboard from "../pages/Dashboard";
+import About from "../pages/About";
+import { AnimatePresence } from "framer-motion";
+
+const Routes = () => {
+  return (
+    <AnimatePresence>
+      <Switch>
+        <Route component={Home} exact path="/" />
+        <Route component={Login} path="/login" />
+        <Route component={Signup} path="/signup" />
+        <Route component={Dashboard} path="/dashboard" />
+        <Route component={About} path="/about" />
+      </Switch>
+    </AnimatePresence>
+  );
+};
+
+export default Routes;
