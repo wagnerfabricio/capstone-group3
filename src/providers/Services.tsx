@@ -14,7 +14,7 @@ interface ServicesProviderProps {
 
 interface iService {
   id?: number;
-  prodId: number;
+  prodId?: number;
   userId: string;
   title: string;
   description: string;
@@ -60,6 +60,9 @@ export const ServicesProvider = ({ children }: ServicesProviderProps) => {
   const addService = useCallback(
     //newService devirá vir com o id do pruduto alterado de "id" para "prodId" se não, o server não atribuirá um novo id para o serviço...
     async (newService: iService, userId: string, accessToken: string) => {
+      newService.prodId = newService.id
+      delete newService.id
+      
       await api
         .post(
           `/services`,
