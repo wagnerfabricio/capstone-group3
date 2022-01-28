@@ -14,6 +14,7 @@ interface ProductsProviderProps {
 
 interface iProduct {
   id?: number;
+  prodId?: number;
   userId: string;
   title: string;
   description: string;
