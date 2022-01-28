@@ -5,6 +5,7 @@ import Signup from "../pages/Signup";
 import Dashboard from "../pages/Dashboard";
 import About from "../pages/About";
 import { AnimatePresence } from "framer-motion";
+import DashboardClient from "../pages/DashboardClient";
 
 const Routes = () => {
   return (
@@ -14,6 +15,7 @@ const Routes = () => {
         <Route component={Login} path="/login" />
         <Route component={Signup} path="/signup" />
         <Route component={Dashboard} path="/dashboard" />
+        <Route component={DashboardClient} path="/dashboardClient" />
         <Route component={About} path="/about" />
       </Switch>
     </AnimatePresence>

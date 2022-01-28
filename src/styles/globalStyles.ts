@@ -8,9 +8,9 @@ const GlobalStyle = createGlobalStyle`
     outline: 0;
     font-family: ui-serif;
     
-  ::-webkit-scrollbar{
+  /* ::-webkit-scrollbar{
     display: none;
-  }
+  } */
 }
 
 :root {
