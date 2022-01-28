@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import teste from "../../assets/teste.png";
 
 export const Container = styled.div`
   background: #42918d;
   height: 100%;
   min-height: 100vh;
-  background-image: url(${teste});
+
   background-size: cover;
   background-position: center;
   h4,
