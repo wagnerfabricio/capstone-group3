@@ -14,16 +14,19 @@ import profileImage from "../../assets/images/profileImage.svg";
 import { useUserServices } from "../../providers/Services";
 import { useAuth } from "../../providers/Auth";
 import { useEffect } from "react";
+import { useProducts } from "../../providers/Products";
 
 const DashboardClient = () => {
   const arr = [1, 2, 3, 4];
 
   const { userGetServices, userServices } = useUserServices();
   const { user } = useAuth();
+  const { getProducts, products } = useProducts();
 
   useEffect(() => {
-    userGetServices(user.id)
-  }, [userServices])
+    getProducts()
+    userGetServices(user.id);
+  }, [userServices]);
 
   return (
     <>
@@ -50,28 +53,23 @@ const DashboardClient = () => {
         </Header>
         <Container>
           <h3>Agenda de tratamentos</h3>
-          <Card>
+          {/* <Card>
             <p>24/01/2022</p>
             <p>Massagem Corretora</p>
-          </Card>
-          <Card>
-            <p>24/01/2022</p>
-            <p>Massagem Corretora</p>
-          </Card>
-          <Card>
-            <p>24/01/2022</p>
-            <p>Massagem Corretora</p>
-          </Card>
-          <Card>
-            <p>24/01/2022</p>
-            <p>Massagem Corretora</p>
-          </Card>
-
+          </Card> */}
+          {userServices.map((item) => {
+            return (
+              <Card>
+                <p>{item.date}</p>
+                <p>{item.title}</p>
+              </Card>
+            );
+          })}
           <h3>Mais serviços</h3>
           <Input placeholder="O que você gostaria de fazer hoje?" />
 
           <ul>
-            {userServices.map((item) => {
+            {products.map((item) => {
               return (
                 <ServicesCard>
                   <div>
