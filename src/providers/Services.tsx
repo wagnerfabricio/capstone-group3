@@ -48,7 +48,7 @@ export const ServicesProvider = ({ children }: ServicesProviderProps) => {
     api
       .get(`/users/${userId}?_embed=services`)
       .then((res) => {
-        setUserServices(res.data);
+        setUserServices(res.data.services);
         setIsServicesLoading(false);
       })
       .catch((err) => {
