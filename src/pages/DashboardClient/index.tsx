@@ -11,9 +11,20 @@ import {
 import { FaPlus } from "react-icons/fa";
 import cardImage from "../../assets/images/cardImage.svg";
 import profileImage from "../../assets/images/profileImage.svg";
+import { useUserServices } from "../../providers/Services";
+import { useAuth } from "../../providers/Auth";
+import { useEffect } from "react";
 
 const DashboardClient = () => {
   const arr = [1, 2, 3, 4];
+
+  const { userGetServices, userServices } = useUserServices();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    userGetServices(user.id)
+  }, [userServices])
+
   return (
     <>
       <Background>
@@ -60,13 +71,13 @@ const DashboardClient = () => {
           <Input placeholder="O que você gostaria de fazer hoje?" />
 
           <ul>
-            {arr.map((item) => {
+            {userServices.map((item) => {
               return (
                 <ServicesCard>
                   <div>
                     <img src={cardImage} alt="cardimage" />
 
-                    <h6>Drenagem Linfatica</h6>
+                    <h6>{item.title}</h6>
                     <button>
                       <FaPlus />
                     </button>
