@@ -5,6 +5,7 @@ import {
   useContext,
   useState,
 } from "react";
+import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../services/api";
 
@@ -61,6 +62,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return {} as iAuth;
   });
 
+  const history = useHistory();
+
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
     const response = await api.post("/signin", { email, password });
 
@@ -74,13 +77,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signUp = useCallback(async (signUpdata: iSignUpData) => {
     await api
-      .post("/singup", signUpdata)
+      .post("/signup", signUpdata)
       .then((_) => {
-        toast.success("Cadastro realizado com sucesso! faça login")
+        toast.success("Cadastro realizado com sucesso! faça login");
+        history.push("/login");
       })
       .catch((err) => {
-        toast.error("Email já cadastrado!")
-        console.log(err)});
+        toast.error("Email já cadastrado!");
+        console.log(err);
+      });
   }, []);
 
   const signOut = useCallback(() => {
