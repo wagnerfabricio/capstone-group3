@@ -10,11 +10,11 @@ export const Container = styled.div`
 export const Content = styled.div`
   max-width: 90%;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
 
-  @media (min-width: 800px) {
+  @media (min-width: 1000px) {
     max-width: 80%;
     flex-direction: row;
   }
@@ -25,8 +25,7 @@ export const ImageContainer = styled.div`
   display: block;
   padding: 20px;
   border-radius: 50%;
-  /* animation: slideRight 1s; */
-
+  /* animation: slideLeft 1s; */
 
   img {
     max-width: 100%;
@@ -34,34 +33,11 @@ export const ImageContainer = styled.div`
     object-fit: contain;
   }
 
-  @media (min-width: 800px) {
+  @media (min-width: 1000px) {
     height: 100vh;
     display: grid;
     place-items: center;
     border-radius: 0;
-  }
-
-  @keyframes slideRight {
-    from {
-      margin-right: 30%;
-      opacity: 20%;
-    }
-    to {
-      margin-right: 0%;
-      opacity: 100%;
-    }
-  }
-`;
-
-export const FormContainer = styled.div`
-  display: grid;
-  place-items: center;
-  /* animation: slideLeft 1s; */
-
-  @media (min-width: 800px) {
-    width: 50%;
-    height: 100vh;
-    padding: 20px;
   }
 
   @keyframes slideLeft {
@@ -76,6 +52,31 @@ export const FormContainer = styled.div`
   }
 `;
 
+export const FormContainer = styled.div`
+  display: grid;
+  place-items: center;
+  width: 100%;
+  margin-bottom: 30px;
+  /* animation: slideRight 1s; */
+
+  @media (min-width: 1000px) {
+    width: 50%;
+    height: 100vh;
+    padding: 20px;
+  }
+
+  @keyframes slideRight {
+    from {
+      margin-right: 30%;
+      opacity: 20%;
+    }
+    to {
+      margin-right: 0%;
+      opacity: 100%;
+    }
+  }
+`;
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -85,6 +86,7 @@ export const Form = styled.form`
   padding: 30px 20px;
   border: 1px solid #f2eded;
   border-radius: 8px;
+  margin-bottom: 20px;
   font-family: "Roboto", arial;
 
   h2 {
@@ -117,5 +119,14 @@ export const Form = styled.form`
     text-align: center;
     max-width: 70%;
     align-self: center;
+
+    a {
+      color: #bdbdbd;
+      font-weight: bold;
+
+      :hover {
+        text-decoration: underline;
+      }
+    }
   }
 `;
