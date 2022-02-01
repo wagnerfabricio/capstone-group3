@@ -1,12 +1,16 @@
 import styled from "styled-components";
+import wallpaper from "../../assets/images/wallpaper.jpg";
 
 export const Container = styled.div`
-  background: #42918d;
+  background-image: url(${wallpaper});
+  padding: 40px;
   height: 100%;
   min-height: 100vh;
-
   background-size: cover;
   background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   h4,
   h3,
   h5 {
@@ -18,25 +22,87 @@ export const Container = styled.div`
   }
 `;
 
-export const HeaderContainer = styled.div`
-  width: 100%;
-  height: 70px;
-  background: #a06b79;
+export const Aside = styled.header`
+  background-color: #98343c;
+  height: 15vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  color: white;
+  box-sizing: border-box;
+  span {
+    font-size: 0.9rem;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  p {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  section {
+    margin: 15px;
+  }
   div {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: white;
+    margin: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
-    border: 2px solid black;
-    border-radius: 50%;
   }
-  h2 {
+  img {
+    width: 50px;
+  }
+  .footerDesktop {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    height: 80vh;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background: linear-gradient(180deg, #98343c 50%, white 50%);
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    align-items: center;
     color: white;
+
+    section {
+      margin-top: 50px;
+      background-color: white;
+      color: black;
+      padding: 15px;
+      padding: 40px 15px 40px 15px;
+      border-radius: 10px;
+    }
+    div {
+      margin-top: 40px;
+      width: 140px;
+      height: 140px;
+      img {
+        width: 70px;
+      }
+    }
+    .footerDesktop {
+      width: 280px;
+      height: 400px;
+      display: flex;
+      flex-wrap: wrap;
+      background-color: transparent;
+      color: black;
+      h3 {
+        color: #42918d;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      p {
+        margin: 10px;
+      }
+    }
   }
 `;
 
@@ -44,14 +110,15 @@ export const PlannerContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
   height: 80vh;
   @media (min-width: 900px) {
     flex-direction: row;
     justify-content: center;
-
-    gap: 50px;
+    width: 90%;
+    height: 80vh;
   }
 `;
 
@@ -62,10 +129,9 @@ export const Content = styled.div`
 
   align-items: center;
   width: 95%;
-  max-width: 439px;
-  height: 330px;
+  height: 100%;
   background-color: rgba(255, 255, 255, 0.842);
-  border-radius: 36px;
+
   gap: 20px;
   p {
     font-size: small;
@@ -97,10 +163,10 @@ export const SearchContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 95%;
-  max-width: 439px;
-  height: 330px;
+  height: 100%;
   background-color: rgba(255, 255, 255, 0.842);
-  border-radius: 36px;
+  border-top-right-radius: 36px;
+  border-bottom-right-radius: 36px;
   gap: 20px;
   p {
     font-size: small;
