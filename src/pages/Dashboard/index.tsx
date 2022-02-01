@@ -1,89 +1,77 @@
-import { useEffect } from "react";
-import { FiUser, FiCalendar } from "react-icons/fi";
+import { FiUser } from "react-icons/fi";
 import { useAdmin } from "../../providers/Admin";
-import { useAuth } from "../../providers/Auth";
-import profileImage from "../../assets/images/profileImage.svg";
 import {
+  HeaderContainer,
   PlannerContainer,
   Content,
+  Lista,
   Pesquisa,
   SearchContainer,
   Container,
   ListaPesquisa,
-  Aside,
 } from "./styles";
-import UserListInfo from "../../components/UserListInfo";
 
 const Dashboard = () => {
-  const { users, adminServices, adminGetServices, adminGetUsers } = useAdmin();
-  console.log(adminServices);
-  const { accessToken } = useAuth();
+  const { users } = useAdmin();
+  console.log(users);
 
-  const todayDate = new Date();
-
-  const formatDate = (element: Date) => {
-    switch (element.getMonth()) {
-      case 0:
-        return "Janeiro";
-      case 1:
-        return "Fevereiro";
-      case 2:
-        return "Março";
-      case 3:
-        return "Abril";
-      case 4:
-        return "Maio";
-      case 5:
-        return "Junho";
-      case 6:
-        return "Julho";
-      case 7:
-        return "Agosto";
-      case 8:
-        return "Setembro";
-      case 9:
-        return "Outubro";
-      case 10:
-        return "Novembro";
-      case 11:
-        return "Dezembro";
-    }
-  };
-
-  useEffect(() => {
-    adminGetServices(accessToken);
-    adminGetUsers(accessToken);
-  }, []);
+  const user = [
+    {
+      horário: "12:30",
+      name: "Foster",
+      service: "Quick Massagem",
+      Realizado: true,
+    },
+    {
+      horário: "13:00",
+      name: "Vagner",
+      service: "Quick Massagem",
+      Realizado: false,
+    },
+    {
+      horário: "13:30",
+      name: "Rego",
+      service: "Quick Massagem",
+      Realizado: false,
+    },
+    {
+      horário: "14:00",
+      name: "Bruno",
+      service: "Quick Massagem",
+      realizado: true,
+    },
+  ];
 
   return (
     <Container>
+      <HeaderContainer>
+        <h2> Header </h2>
+        <div>
+          <FiUser size="40" />
+        </div>
+      </HeaderContainer>
       <PlannerContainer>
-        <Aside>
-          <div className="footerDesktop"></div>
-          <section>
-            <p>
-              <b>
-                Hoje, {todayDate.getDate()} de {formatDate(todayDate)}
-              </b>
-            </p>
-            <h2>Bom dia, Kenzinho!</h2>
-          </section>
-          <div>
-            <img src={profileImage} alt="headerImage" />
-          </div>
-        </Aside>
         <Content>
           <h3>Planejamento do dia</h3>
           <h5>Hora | Interagente | Procedimento | Realizado</h5>
-          <UserListInfo services={adminServices} users={users} admin={true} />
+          <ul>
+            {user.map((element) => (
+              <Lista>
+                <p>{element.horário} | </p>
+                <p>{element.name} | </p>
+                <p>{element.service} | </p>
+                <input name="isGoing" type="checkbox" />
+              </Lista>
+            ))}
+          </ul>
         </Content>
         <SearchContainer>
           <Pesquisa placeholder="Pesquisa de cliente..."></Pesquisa>
           <ul>
             <h4>Lista de Pacientes</h4>
-            {users.map((element) => (
+            {user.map((element) => (
               <ListaPesquisa>
-                <button>{element.name}</button>
+                <p>{element.name}</p>
               </ListaPesquisa>
             ))}
           </ul>
