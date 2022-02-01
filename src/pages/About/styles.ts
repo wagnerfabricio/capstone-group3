@@ -23,8 +23,43 @@ export const Content = styled.div`
   margin-bottom: 30px;
 
   @media (min-width: 800px) {
-    max-width: 80%;
+    width: 80%;
     flex-direction: row;
     flex-wrap: wrap;
+
+    /* a:nth-child(odd) {
+      align-self: flex-start;
+    }
+
+    a:nth-child(even) {
+      align-self: flex-end;
+    } */
+  }
+
+  a {
+    border: none;
+    text-align: left;
+
+    :any-link {
+      color: black;
+      text-decoration: none;
+    }
+
+    :hover {
+      h2 {
+        text-decoration: underline;
+      }
+    }
+  }
+`;
+
+export const CardImageContainer = styled.div`
+  width: 300px;
+  height: 300px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
   }
 `;
