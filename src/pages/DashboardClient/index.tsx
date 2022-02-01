@@ -8,25 +8,67 @@ import {
   Input,
   AsideRight,
 } from "./styles";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaSearch } from "react-icons/fa";
 import cardImage from "../../assets/images/cardImage.svg";
 import profileImage from "../../assets/images/profileImage.svg";
 import { useUserServices } from "../../providers/Services";
 import { useAuth } from "../../providers/Auth";
 import { useEffect } from "react";
 import { useProducts } from "../../providers/Products";
+import { useForm } from "react-hook-form";
+import { text } from "stream/consumers";
+import MenuProfile from "./Menu";
 
+interface SearchData {
+  title: string;
+}
 const DashboardClient = () => {
-  const arr = [1, 2, 3, 4];
-
   const { userGetServices, userServices } = useUserServices();
   const { user } = useAuth();
-  const { getProducts, products } = useProducts();
+  const { getProducts, products, searchProduct } = useProducts();
+  const { accessToken } = useAuth();
+
+  const todayDate = new Date();
+
+  const formatDate = (element: Date) => {
+    switch (element.getMonth()) {
+      case 0:
+        return "Janeiro";
+      case 1:
+        return "Fevereiro";
+      case 2:
+        return "Março";
+      case 3:
+        return "Abril";
+      case 4:
+        return "Maio";
+      case 5:
+        return "Junho";
+      case 6:
+        return "Julho";
+      case 7:
+        return "Agosto";
+      case 8:
+        return "Setembro";
+      case 9:
+        return "Outubro";
+      case 10:
+        return "Novembro";
+      case 11:
+        return "Dezembro";
+    }
+  };
 
   useEffect(() => {
-    getProducts()
+    getProducts();
     userGetServices(user.id);
-  }, [userServices]);
+  }, []);
+
+  const handleSearch = ({ title }: SearchData) => {
+    searchProduct(title, accessToken);
+  };
+
+  const { register, handleSubmit } = useForm<SearchData>();
 
   return (
     <>
@@ -35,17 +77,24 @@ const DashboardClient = () => {
           <div className="footerDesktop">
             <h3>Últimas sessões</h3>
 
-            <p>24/01/2022</p>
-            <p>Massagem Corretora</p>
-            <p>24/01/2022</p>
-            <p>Massagem Corretora</p>
+            {userServices.map((item) => {
+              return (
+                <Card key={item.id}>
+                  <p>{item.date}</p>
+                  <p>{item.title}</p>
+                </Card>
+              );
+            })}
           </div>
+          <MenuProfile />
           <section>
             <p>
-              <b>Hoje, 26 de janeiro</b>
+              <b>
+                Hoje, {todayDate.getDate()} de {formatDate(todayDate)}
+              </b>
             </p>
-            <h2>Bom dia, Kenzinho!</h2>
-            <span>Você tem 3 compromissos hoje</span>
+            <h2>Bom dia, {user.name}!</h2>
+            <span>Você tem {userServices.length} compromisso(s) hoje. </span>
           </section>
           <div>
             <img src={profileImage} alt="headerImage" />
@@ -53,36 +102,44 @@ const DashboardClient = () => {
         </Header>
         <Container>
           <h3>Agenda de tratamentos</h3>
-          {/* <Card>
-            <p>24/01/2022</p>
-            <p>Massagem Corretora</p>
-          </Card> */}
           {userServices.map((item) => {
             return (
-              <Card>
+              <Card key={item.id}>
                 <p>{item.date}</p>
                 <p>{item.title}</p>
               </Card>
             );
           })}
           <h3>Mais serviços</h3>
-          <Input placeholder="O que você gostaria de fazer hoje?" />
+          <form onSubmit={handleSubmit(handleSearch)}>
+            <Input
+              placeholder="O que você gostaria de fazer hoje?"
+              {...register("title")}
+            />
+            <button type="submit">
+              <FaSearch />
+            </button>
+          </form>
 
           <ul>
-            {products.map((item) => {
-              return (
-                <ServicesCard>
-                  <div>
-                    <img src={cardImage} alt="cardimage" />
+            {!products.length ? (
+              <div>Não encontrado</div>
+            ) : (
+              products.map((item) => {
+                return (
+                  <ServicesCard key={item.id}>
+                    <div>
+                      <img src={cardImage} alt="cardimage" />
 
-                    <h6>{item.title}</h6>
-                    <button>
-                      <FaPlus />
-                    </button>
-                  </div>
-                </ServicesCard>
-              );
-            })}
+                      <h6>{item.title}</h6>
+                      <button>
+                        <FaPlus />
+                      </button>
+                    </div>
+                  </ServicesCard>
+                );
+              })
+            )}
           </ul>
         </Container>
 

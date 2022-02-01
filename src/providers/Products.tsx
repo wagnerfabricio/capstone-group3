@@ -130,13 +130,14 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
         },
       });
       if (!response.data.length) {
+        setProducts(response.data);
         return setProductNotFound(true);
       }
-
+      
       setProductNotFound(false);
       setProducts(response.data);
     },
-    []
+    [products]
   );
 
   return (

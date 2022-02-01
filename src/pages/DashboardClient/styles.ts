@@ -113,6 +113,23 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
 
+  form {
+    width: 95%;
+    display: flex;
+
+    button {
+      position: relative;
+      background-color: transparent;
+      right: 11vw;
+      color: #42918d;
+      border: none;
+      border-radius: 50%;
+      padding: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
   h3 {
     color: #42918d;
     font-weight: bold;
@@ -133,6 +150,10 @@ export const Container = styled.div`
       width: 12px;
     }
   }
+  div {
+    display: flex;
+    flex-direction: row;
+  }
   @media (min-width: 500px) {
     height: 80vh;
     width: 65%;
@@ -146,6 +167,11 @@ export const Container = styled.div`
     }
     div {
       width: 80%;
+    }
+    form {
+      button {
+        right: 7vw;
+      }
     }
   }
   @media (min-width: 740px) {
@@ -162,6 +188,11 @@ export const Container = styled.div`
     div {
       width: 80%;
     }
+    form {
+      button {
+        right: 6vw;
+      }
+    }
   }
   @media (min-width: 1024px) {
     height: 90vh;
@@ -175,6 +206,18 @@ export const Container = styled.div`
     }
     div {
       width: 80%;
+    }
+    form {
+      button {
+        right: 5vw;
+      }
+    }
+  }
+  @media (min-width: 1174px) {
+    form {
+      button {
+        right: 4vw;
+      }
     }
   }
 `;
@@ -275,7 +318,7 @@ export const ServicesCard = styled.li`
     margin-top: 7px;
   }
   button {
-    background-color: #4fe73f;
+    background-color: #42918d;
     color: white;
     border: none;
     border-radius: 50%;
@@ -341,7 +384,7 @@ export const ServicesCard = styled.li`
 `;
 export const Input = styled.input`
   height: 4vh;
-  width: 80%;
+  width: 90%;
   margin: 10px;
   background-color: white;
   border: 0.5px solid #42918d;
