@@ -75,9 +75,10 @@ export const ServicesProvider = ({ children }: ServicesProviderProps) => {
         )
         .then((res) => {
           setUserServices([...userServices, res.data]);
+          toast.success('Serviço adicionado com sucesso!')
         })
         .catch((err) => {
-          toast.error("Ocorreu algum erro ao editar o serviço");
+          toast.error("Ocorreu algum erro ao adicionar o serviço");
           console.log(err);
         });
     },

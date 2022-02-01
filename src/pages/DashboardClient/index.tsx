@@ -8,25 +8,62 @@ import {
   Input,
   AsideRight,
 } from "./styles";
-import { FaPlus, FaSearch } from "react-icons/fa";
+
+import { FaPlus, FaSearch, FaTimes } from "react-icons/fa";
 import cardImage from "../../assets/images/cardImage.svg";
 import profileImage from "../../assets/images/profileImage.svg";
 import { useUserServices } from "../../providers/Services";
 import { useAuth } from "../../providers/Auth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useProducts } from "../../providers/Products";
 import { useForm } from "react-hook-form";
-import { text } from "stream/consumers";
-import MenuProfile from "./Menu";
+import setHours from "date-fns/setHours";
+import setMinutes from "date-fns/setMinutes";
+import { Box, Button, Modal, Typography } from "@mui/material";
+import CustomDatePicker from "../../components/CustomDatePicker";
 
 interface SearchData {
   title: string;
 }
+interface iService {
+  id?: number;
+  prodId?: number;
+  userId: string;
+  title: string;
+  description: string;
+  url: string;
+  price: number;
+  date: string;
+  done: boolean;
+  payed: boolean;
+}
+interface iProduct {
+  id?: number;
+  prodId?: number;
+  userId: string;
+  title: string;
+  description: string;
+  url: string;
+  price: number;
+  done: boolean;
+  payed: boolean;
+}
+
 const DashboardClient = () => {
-  const { userGetServices, userServices } = useUserServices();
+  const { userGetServices, userServices, addService } = useUserServices();
   const { user } = useAuth();
   const { getProducts, products, searchProduct } = useProducts();
   const { accessToken } = useAuth();
+  const [open, setOpen] = useState(false);
+  const [actualProd, setActualProd] = useState<iProduct>({} as iProduct);
+
+  const [newDate, setNewDate] = useState<Date | null>(
+    setHours(setMinutes(new Date(), 0), 9)
+  );
+
+  const handleNewDate = (novaData: Date | null) => {
+    setNewDate(novaData);
+  };
 
   const todayDate = new Date();
 
@@ -70,12 +107,37 @@ const DashboardClient = () => {
 
   const { register, handleSubmit } = useForm<SearchData>();
 
+  const handleOpenModal = (item: iProduct) => {
+    setOpen(true);
+    setActualProd(item);
+  };
+
+  const handleAddService = () => {
+    const date = newDate + ''
+    const newService = { ...actualProd, date };
+    addService(newService, user.id, accessToken);
+    setOpen(false);
+  };
+
+  const style = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
   return (
     <>
       <Background>
         <Header>
           <div className="footerDesktop">
-            <h3>Últimas sessões</h3>
+            <div>
+              <h3>Últimas sessões</h3>
+            </div>
 
             {userServices.map((item) => {
               return (
@@ -86,7 +148,7 @@ const DashboardClient = () => {
               );
             })}
           </div>
-          <MenuProfile />
+
           <section>
             <p>
               <b>
@@ -102,14 +164,17 @@ const DashboardClient = () => {
         </Header>
         <Container>
           <h3>Agenda de tratamentos</h3>
-          {userServices.map((item) => {
-            return (
-              <Card key={item.id}>
-                <p>{item.date}</p>
-                <p>{item.title}</p>
-              </Card>
-            );
-          })}
+          <section>
+            {userServices.map((item) => {
+              return (
+                <Card key={item.id}>
+                  <p>{item.date}</p>
+                  <p>{item.title}</p>
+                </Card>
+              );
+            })}
+          </section>
+
           <h3>Mais serviços</h3>
           <form onSubmit={handleSubmit(handleSearch)}>
             <Input
@@ -132,7 +197,7 @@ const DashboardClient = () => {
                       <img src={cardImage} alt="cardimage" />
 
                       <h6>{item.title}</h6>
-                      <button>
+                      <button onClick={() => handleOpenModal(item)}>
                         <FaPlus />
                       </button>
                     </div>
@@ -157,8 +222,56 @@ const DashboardClient = () => {
             </Card>
           </div>
         </Footer>
+
         <AsideRight></AsideRight>
       </Background>
+      <Modal open={open}>
+        <Box sx={style}>
+          <Button
+            onClick={() => setOpen(false)}
+            sx={{
+              backgroundColor: "white",
+              color: "red",
+              marginLeft: "90%",
+            }}
+          >
+            <FaTimes />
+          </Button>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {actualProd.title}
+          </Typography>
+          <Typography
+            id="modal-modal-description"
+            sx={{
+              mt: 2,
+              fontSize: "13px",
+              color: "#706f74",
+            }}
+          >
+            {actualProd.description}
+          </Typography>
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <CustomDatePicker handleNewDate={handleNewDate} />
+            <Button
+              sx={{
+                heigth: "20px",
+                width: "150px",
+                backgroundColor: "#42918d",
+                mt: 2,
+                fontSize: "13px",
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "#367673",
+                },
+              }}
+              onClick={() => handleAddService()}
+            >
+              <FaPlus />
+              <span>Agendar</span>
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
     </>
   );
 };

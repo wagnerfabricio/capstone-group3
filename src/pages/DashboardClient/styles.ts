@@ -63,7 +63,7 @@ export const Header = styled.header`
     background: linear-gradient(180deg, #98343c 50%, white 50%);
     display: flex;
     flex-direction: column-reverse;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     color: white;
 
@@ -84,15 +84,22 @@ export const Header = styled.header`
       }
     }
     .footerDesktop {
-      width: 180px;
-      height: 400px;
       display: flex;
       flex-direction: column;
       background-color: transparent;
       color: black;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      border-radius: 0px;
+      height: 45vh;
+      width: 20vw;
+      margin: 0px;
+
       h3 {
         color: #42918d;
         font-family: Arial, Helvetica, sans-serif;
+        height: 50px;
+        margin-top: 150px;
       }
       p {
         margin: 10px;
@@ -101,7 +108,7 @@ export const Header = styled.header`
   }
 `;
 export const Container = styled.div`
-  height: 70vh;
+  height: 80vh;
   width: auto;
   padding-top: 7px;
   margin: 10px;
@@ -114,7 +121,7 @@ export const Container = styled.div`
   flex-direction: column;
 
   form {
-    width: 95%;
+    width: 89%;
     display: flex;
 
     button {
@@ -140,9 +147,18 @@ export const Container = styled.div`
     display: flex;
     flex-direction: row;
   }
+  section {
+    max-height: 40vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+  }
   ul {
-    width: 80%;
-    height: 230px;
+    width: 85%;
+    max-height: 230px;
     display: flex;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -250,7 +266,7 @@ export const Footer = styled.footer`
     display: none;
   }
 `;
-export const Card = styled.div`
+export const Card = styled.li`
   height: 5vh;
   width: 80%;
   margin: 10px;
@@ -273,7 +289,7 @@ export const Card = styled.div`
   }
   @media (min-width: 1024px) {
     height: 5vh;
-    width: 80%;
+    width: 90%;
     margin: 10px;
     background-color: white;
     border: none;
@@ -290,7 +306,7 @@ export const Card = styled.div`
 `;
 export const ServicesCard = styled.li`
   height: 20vh;
-  min-width: 35%;
+  min-width: 30%;
   margin: 5px;
   background-color: white;
   border: 0.5px solid #42918d;
