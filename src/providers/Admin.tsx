@@ -14,10 +14,11 @@ interface AdminProviderProps {
 
 interface iUser {
   email: string;
-  id: string;
   name: string;
+  contact: string;
+  id: string;
   cpf: number;
-  admin: boolean;
+  admin?: boolean;
 }
 
 interface iService {
@@ -37,12 +38,21 @@ interface AdminContextData {
   users: iUser[];
   adminLoadingUsers: boolean;
   adminGetUsers: (accessToken: string) => Promise<void>;
+  searchedUser: iUser[];
+  adminSearchUser: (searchValue: string, searchType: string) => Promise<void>;
 
   adminServices: iService[];
   adminLoadingServices: boolean;
   adminGetServices: (accessToken: string) => Promise<void>;
-  adminAddService: (newService: iService, userId: string, accessToken: string) => Promise<void>
-  adminEditService: (editedService: iService, accessToken: string) => Promise<void>;
+  adminAddService: (
+    newService: iService,
+    userId: string,
+    accessToken: string
+  ) => Promise<void>;
+  adminEditService: (
+    editedService: iService,
+    accessToken: string
+  ) => Promise<void>;
   adminPayService: (serviceId: number, accessToken: string) => Promise<void>;
   adminDoneService: (serviceId: number, accessToken: string) => Promise<void>;
 }
@@ -52,6 +62,7 @@ const AdminContext = createContext<AdminContextData>({} as AdminContextData);
 export const AdminProvider = ({ children }: AdminProviderProps) => {
   const [users, setUsers] = useState<iUser[]>([]);
   const [adminLoadingUsers, setAdminLoadingUsers] = useState(true);
+  const [searchedUser, setSearchedUser] = useState<iUser[]>([]);
   const [adminServices, setAdminServices] = useState<iService[]>([]);
   const [adminLoadingServices, setAdminLoadingServices] = useState(true);
 
@@ -74,6 +85,21 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
       });
   }, []);
 
+  const adminSearchUser = useCallback(
+    //searchType options: name, cpf, contact
+    async (searchValue, searchType) => {
+      const response = await api.get(
+        `/users?${searchType}_like=${searchValue}`
+      );
+      if (!response.data.length) {
+        return setSearchedUser([]);
+      }
+
+      setSearchedUser(response.data);
+    },
+    []
+  );
+
   const adminGetServices = useCallback(async (accessToken: string) => {
     setAdminLoadingServices(true);
     api
@@ -95,8 +121,8 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
 
   const adminAddService = useCallback(
     async (newService: iService, userId: string, accessToken: string) => {
-      newService.prodId = newService.id
-      delete newService.id
+      newService.prodId = newService.id;
+      delete newService.id;
 
       await api
         .post(
@@ -217,6 +243,8 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
       value={{
         users,
         adminLoadingUsers,
+        searchedUser,
+        adminSearchUser,
         adminGetUsers,
         adminServices,
         adminLoadingServices,
