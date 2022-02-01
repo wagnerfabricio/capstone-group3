@@ -24,7 +24,7 @@ const DashboardClient = () => {
   const { getProducts, products } = useProducts();
 
   useEffect(() => {
-    getProducts()
+    getProducts();
     userGetServices(user.id);
   }, [userServices]);
 
