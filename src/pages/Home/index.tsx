@@ -2,6 +2,9 @@ import { Container } from "./style";
 import HomeBannerimage from "../../assets/images/banner5.svg";
 import { ServiceHomeCard } from "../../components/serviceHomeCard";
 import HomeCardImage01 from "../../assets/images/homecard01.svg";
+import HomeCardImage02 from "../../assets/images/homecard02.svg";
+import HomeCardImage03 from "../../assets/images/homecard03.svg";
+import HomeCardImage04 from "../../assets/images/homecard04.svg";
 import DetailImage01 from "../../assets/images/detailImage01.svg";
 import DetailImage02 from "../../assets/images/detailImage02.svg";
 import FooterImage01 from "../../assets/images/FooterImage01.svg";
@@ -50,24 +53,24 @@ const Home = () => {
             </div>
             <div className="services__cards">
               <ServiceHomeCard
-                image={HomeCardImage01}
-                description="Massagem com produtos para pele"
-                title="Massagem"
+                image={HomeCardImage03}
+                description="Para qunado o dia está corrido, mas a dorzinha não te deixa trabalhar"
+                title="Massagem Rápida"
+              ></ServiceHomeCard>
+              <ServiceHomeCard
+                image={HomeCardImage02}
+                description="Massagem para os dias mais estressantes"
+                title="Massagem Relaxante"
+              ></ServiceHomeCard>
+              <ServiceHomeCard
+                image={HomeCardImage04}
+                description="Para qunado sua pele está precisando de um trato especial."
+                title="Massagem Hidratante"
               ></ServiceHomeCard>
               <ServiceHomeCard
                 image={HomeCardImage01}
-                description="Massagem com produtos para pele"
-                title="Massagem"
-              ></ServiceHomeCard>
-              <ServiceHomeCard
-                image={HomeCardImage01}
-                description="Massagem com produtos para pele"
-                title="Massagem"
-              ></ServiceHomeCard>
-              <ServiceHomeCard
-                image={HomeCardImage01}
-                description="Massagem com produtos para pele"
-                title="Massagem"
+                description="Para os dias mais frios, pedras aquecidas te relaxam ainda mais"
+                title="Massagem Aquecida"
               ></ServiceHomeCard>
             </div>
             <div className="services__details">
@@ -77,10 +80,9 @@ const Home = () => {
                 </div>
                 <div className="detail__text">
                   <p id="text">
-                    Mr. Mime is a bipedal, humanoid Pokémon. Blue growths
-                    resembling clown hair extend from the sides of its pale pink
-                    head, and there is a magenta circle on each cheek. Its jaw
-                    is...
+                    Todo tipo de cuidados para você e para sua pele. Nossos
+                    profissionais sempre utilizam o que há de mais moderno no
+                    mundo dos cosméticos, além de serem experts no manuseio.
                   </p>
                 </div>
               </div>
@@ -90,10 +92,9 @@ const Home = () => {
                 </div>
                 <div className="detail__text">
                   <p id="text">
-                    Mr. Mime is a bipedal, humanoid Pokémon. Blue growths
-                    resembling clown hair extend from the sides of its pale pink
-                    head, and there is a magenta circle on each cheek. Its jaw
-                    is...
+                    Profissionais treinados nas melhores instituições de
+                    cuidados para o corpo. Oferecemos todo os tipos de serviços
+                    quando o assunto é massoterapia.
                   </p>
                 </div>
               </div>
@@ -106,7 +107,9 @@ const Home = () => {
         </main>
         <footer>
           <div className="footer__top"></div>
-          <div className="footer__details"></div>
+          <div className="footer__details">
+            <p>Todos os direitos reservados</p>
+          </div>
         </footer>
       </Container>
     </>

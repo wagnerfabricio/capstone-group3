@@ -1,3 +1,5 @@
+import fundo from "../../assets/images/homeBackground.svg";
+
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -12,11 +14,30 @@ export const Container = styled.div`
     background-color: #250f00;
     height: 10vh;
     width: 100%;
+    padding: 20px;
   }
   main {
-    width: 100%;
+    width: 100vw;
   }
-  @media (max-width: 1024px) {
+  header {
+    display: flex;
+    align-items: center;
+    ul {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-around;
+
+      li {
+        text-decoration: none;
+        list-style: none;
+        color: #ffffff;
+        font-weight: bold;
+      }
+    }
+  }
+
+  @media (max-width: 1023px) {
     .home__image {
       height: auto;
       width: 100%;
@@ -34,19 +55,20 @@ export const Container = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
-      background-image: url("../../assets/images/wellpaperMassoterapia 3.jpg");
+      background-image: url(${fundo});
       background-size: cover;
-      background-repeat: no-repeat;
     }
     .services__header {
       height: 10vh;
       color: #ffffff;
       width: 100%;
       background-color: #42918d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .services__cards {
       width: 100%;
-      max-width: 1420px;
       height: auto;
       display: flex;
       flex-direction: row;
@@ -56,11 +78,11 @@ export const Container = styled.div`
       display: none;
     }
     .services__details {
-      height: 700px;
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
+      background-color: #ffffff99;
       justify-content: center;
       max-width: 1420px;
       .detail__sector {
@@ -126,11 +148,16 @@ export const Container = styled.div`
         width: 100%;
         height: 150px;
         background-color: #250f00;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        color: #ffffff;
+        padding: 20px;
       }
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1023px) {
     header {
       display: flex;
       flex-direction: row-reverse;
@@ -138,11 +165,13 @@ export const Container = styled.div`
       ul {
         display: flex;
         flex-direction: row;
+        width: 20%;
+        justify-content: space-around;
+
         li {
           text-decoration: none;
           list-style: none;
           color: #ffffff;
-          margin: 20px;
           font-weight: bold;
         }
         li:hover {
@@ -159,7 +188,9 @@ export const Container = styled.div`
       align-items: center;
 
       img {
-        height: 100%;
+        height: auto;
+        max-height: 700px;
+        width: 100%;
         margin: 0 auto;
       }
     }
@@ -168,6 +199,10 @@ export const Container = styled.div`
       width: 100%;
       display: flex;
       flex-direction: column;
+      background-image: url(${fundo});
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
       align-items: center;
       justify-content: center;
     }
@@ -187,6 +222,7 @@ export const Container = styled.div`
       align-items: center;
       width: 80%;
       padding: 20px;
+      background-color: #ffffff;
     }
 
     .services__details {
@@ -196,6 +232,8 @@ export const Container = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      background-color: #ffffff99;
+      border-radius: 0 0 20px 20px;
     }
     .services__cards {
       display: flex;
@@ -208,24 +246,29 @@ export const Container = styled.div`
     .detail__sector {
       display: flex;
       flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
 
       .detail__image {
-        width: 50%;
+        width: 45%;
         display: flex;
         align-items: center;
         padding: 20px;
         img {
+          width: 100%;
+          height: auto;
           margin: 0 auto;
         }
       }
     }
     .detail__text {
-      width: 50%;
+      width: 45%;
       display: flex;
       align-items: center;
       justify-content: center;
       p {
-        font-size: 30px;
+        font-size: 28px;
         width: 80%;
       }
     }
@@ -252,6 +295,11 @@ export const Container = styled.div`
         width: 100%;
         height: 150px;
         background-color: #250f00;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        color: #ffffff;
+        padding: 20px;
       }
     }
   }
