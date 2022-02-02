@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, useState } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
@@ -6,7 +6,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import ptBR from "date-fns/locale/pt-BR";
 registerLocale("ptBR", ptBR);
 
-const CustomDatePicker = () => {
+interface CustomDatePickerProps {
+  handleNewDate: (data: Date | null) => void;
+}
+const CustomDatePicker = ({ handleNewDate }: CustomDatePickerProps) => {
   const [startDate, setStartDate] = useState<Date | null>(
     setHours(setMinutes(new Date(), 0), 9)
   );
@@ -18,11 +21,17 @@ const CustomDatePicker = () => {
 
   console.log(startDate);
 
+  const handleChange = (date: Date | null) => {
+    setStartDate(date);
+    handleNewDate(date);
+  };
+
   return (
     <DatePicker
+      inline
       selected={startDate}
       filterDate={isWeekday}
-      onChange={(date) => setStartDate(date)}
+      onChange={(date) => handleChange(date)}
       locale={ptBR}
       showTimeSelect
       timeFormat="p"

@@ -70,7 +70,21 @@ const UserListInfo = ({
           return (
             <Lista>
               <p>
-                {fixDate.getHours()}:{fixDate.getUTCMinutes()} |
+                {fixDate.getDate() > 9
+                  ? fixDate.getDate()
+                  : `0${fixDate.getDate()}`}
+                /
+                {fixDate.getMonth() > 9
+                  ? fixDate.getMonth() + 1
+                  : `0${fixDate.getMonth() + 1}`}{" "}
+                |{" "}
+                {fixDate.getHours() > 9
+                  ? fixDate.getHours()
+                  : `0${fixDate.getHours()}`}
+                :
+                {fixDate.getMinutes() > 9
+                  ? fixDate.getMinutes()
+                  : `0${fixDate.getMinutes()}`}
               </p>
               <p>{element.title}</p>
             </Lista>

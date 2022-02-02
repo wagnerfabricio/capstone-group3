@@ -37,8 +37,9 @@ export const Header = styled.header`
   }
 
   section {
-    margin: 15px;
+    padding: 7px;
   }
+
   div {
     width: 70px;
     height: 70px;
@@ -63,11 +64,16 @@ export const Header = styled.header`
     background: linear-gradient(180deg, #98343c 50%, white 50%);
     display: flex;
     flex-direction: column-reverse;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     color: white;
-
+    .divHeaderTitle {
+      margin: 0;
+      width: 100%;
+      height: 80px;
+    }
     section {
+      margin: 15px;
       margin-top: 50px;
       background-color: white;
       color: black;
@@ -84,24 +90,44 @@ export const Header = styled.header`
       }
     }
     .footerDesktop {
-      width: 180px;
-      height: 400px;
       display: flex;
       flex-direction: column;
       background-color: transparent;
       color: black;
+      border-radius: 0px;
+      height: 45vh;
+      width: 100%;
+      margin: 0px;
+
       h3 {
         color: #42918d;
         font-family: Arial, Helvetica, sans-serif;
       }
+      ul {
+        width: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 40vh;
+      }
+      li {
+        border: 0px;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
       p {
         margin: 10px;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }
 `;
 export const Container = styled.div`
-  height: 70vh;
+  height: 82vh;
   width: auto;
   padding-top: 7px;
   margin: 10px;
@@ -113,6 +139,47 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
 
+  .servicesList {
+    margin-bottom: 50px;
+  }
+
+  .servicesList ul {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    
+    li {
+      justify-content: space-between;
+      padding: 10px;
+      background-color: white;
+      /* width: 97%; */
+    }
+    p {
+      width: 50%;
+    }
+  }
+
+  form {
+    width: 89%;
+    display: flex;
+
+    button {
+      position: relative;
+      background-color: transparent;
+      right: 11vw;
+      color: #42918d;
+      border: none;
+      border-radius: 50%;
+      padding: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
   h3 {
     color: #42918d;
     font-weight: bold;
@@ -123,15 +190,27 @@ export const Container = styled.div`
     display: flex;
     flex-direction: row;
   }
+  section {
+    max-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+  }
   ul {
-    width: 80%;
-    height: 230px;
+    width: 85%;
+    max-height: 230px;
     display: flex;
     overflow-x: scroll;
     overflow-y: hidden;
     *::-webkit-scrollbar {
       width: 12px;
     }
+  }
+  div {
+    display: flex;
+    flex-direction: row;
   }
   @media (min-width: 500px) {
     height: 80vh;
@@ -146,6 +225,11 @@ export const Container = styled.div`
     }
     div {
       width: 80%;
+    }
+    form {
+      button {
+        right: 7vw;
+      }
     }
   }
   @media (min-width: 740px) {
@@ -162,6 +246,11 @@ export const Container = styled.div`
     div {
       width: 80%;
     }
+    form {
+      button {
+        right: 6vw;
+      }
+    }
   }
   @media (min-width: 1024px) {
     height: 90vh;
@@ -171,10 +260,25 @@ export const Container = styled.div`
     background-color: #f3f3f3e0;
     border-radius: 0;
     h3 {
-      margin: 15px;
+      margin-top: 35px;
     }
     div {
       width: 80%;
+    }
+    form {
+      button {
+        right: 5vw;
+      }
+    }
+    li {
+      border: 0px;
+    }
+  }
+  @media (min-width: 1174px) {
+    form {
+      button {
+        right: 4vw;
+      }
     }
   }
 `;
@@ -195,6 +299,10 @@ export const Footer = styled.footer`
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
   }
+  li{
+    width: 95%;
+    margin: 7px;
+  }
   @media (min-width: 500px) {
     width: 70%;
     margin: 0 auto;
@@ -207,7 +315,7 @@ export const Footer = styled.footer`
     display: none;
   }
 `;
-export const Card = styled.div`
+export const Card = styled.li`
   height: 5vh;
   width: 80%;
   margin: 10px;
@@ -226,11 +334,12 @@ export const Card = styled.div`
     text-overflow: ellipsis;
   }
   @media (min-width: 740px) {
-    width: 80%;
+    margin: 7px auto;
+    width: 90%;
   }
   @media (min-width: 1024px) {
     height: 5vh;
-    width: 80%;
+    width: 90%;
     margin: 10px;
     background-color: white;
     border: none;
@@ -247,12 +356,13 @@ export const Card = styled.div`
 `;
 export const ServicesCard = styled.li`
   height: 20vh;
-  min-width: 35%;
+  min-width: 30%;
   margin: 5px;
   background-color: white;
   border: 0.5px solid #42918d;
   border-radius: 25px;
   display: flex;
+  margin-bottom: 10px;
 
   div {
     margin: 0 auto;
@@ -263,7 +373,7 @@ export const ServicesCard = styled.li`
     flex-direction: column;
   }
   h6 {
-    width: 90px;
+    width: 80px;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -275,7 +385,7 @@ export const ServicesCard = styled.li`
     margin-top: 7px;
   }
   button {
-    background-color: #4fe73f;
+    background-color: #42918d;
     color: white;
     border: none;
     border-radius: 50%;
@@ -307,6 +417,7 @@ export const ServicesCard = styled.li`
     display: flex;
 
     div {
+      width: 100%;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -317,7 +428,7 @@ export const ServicesCard = styled.li`
     h6 {
       font-family: Arial, Helvetica, sans-serif;
       margin-top: 10px;
-      width: 120px;
+      width: 100%;
       padding: 5px;
       font-size: 0.9rem;
       text-align: center;
@@ -341,7 +452,7 @@ export const ServicesCard = styled.li`
 `;
 export const Input = styled.input`
   height: 4vh;
-  width: 80%;
+  width: 90%;
   margin: 10px;
   background-color: white;
   border: 0.5px solid #42918d;
