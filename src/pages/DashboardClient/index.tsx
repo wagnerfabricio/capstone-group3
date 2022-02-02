@@ -21,6 +21,7 @@ import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import CustomDatePicker from "../../components/CustomDatePicker";
+import UserListInfo from "../../components/UserListInfo";
 
 interface SearchData {
   title: string;
@@ -113,7 +114,7 @@ const DashboardClient = () => {
   };
 
   const handleAddService = () => {
-    const date = newDate + ''
+    const date = newDate + "";
     const newService = { ...actualProd, date };
     addService(newService, user.id, accessToken);
     setOpen(false);
@@ -130,23 +131,24 @@ const DashboardClient = () => {
     boxShadow: 24,
     p: 4,
   };
+
+  const incomingServices = userServices
+    .filter((service) => new Date(service.date) >= new Date())
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+  const previousServices = userServices
+    .filter((service) => new Date(service.date) < new Date())
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
   return (
     <>
       <Background>
         <Header>
           <div className="footerDesktop">
-            <div>
+            <div className="divHeaderTitle">
               <h3>Últimas sessões</h3>
             </div>
-
-            {userServices.map((item) => {
-              return (
-                <Card key={item.id}>
-                  <p>{item.date}</p>
-                  <p>{item.title}</p>
-                </Card>
-              );
-            })}
+            <UserListInfo userServices={previousServices} />
           </div>
 
           <section>
@@ -156,23 +158,18 @@ const DashboardClient = () => {
               </b>
             </p>
             <h2>Bom dia, {user.name}!</h2>
-            <span>Você tem {userServices.length} compromisso(s) hoje. </span>
+            <span>
+              Você tem {incomingServices.length} compromisso(s) marcados.{" "}
+            </span>
           </section>
           <div>
-            <img src={profileImage} alt="headerImage" />
+            <img src={cardImage} alt="headerImage" />
           </div>
         </Header>
         <Container>
           <h3>Agenda de tratamentos</h3>
-          <section>
-            {userServices.map((item) => {
-              return (
-                <Card key={item.id}>
-                  <p>{item.date}</p>
-                  <p>{item.title}</p>
-                </Card>
-              );
-            })}
+          <section className="servicesList">
+            <UserListInfo userServices={incomingServices} />
           </section>
 
           <h3>Mais serviços</h3>
@@ -194,7 +191,7 @@ const DashboardClient = () => {
                 return (
                   <ServicesCard key={item.id}>
                     <div>
-                      <img src={cardImage} alt="cardimage" />
+                      <img src={item.url} alt="cardimage" />
 
                       <h6>{item.title}</h6>
                       <button onClick={() => handleOpenModal(item)}>
@@ -246,12 +243,22 @@ const DashboardClient = () => {
               mt: 2,
               fontSize: "13px",
               color: "#706f74",
+              marginBottom: "20px",
             }}
           >
             {actualProd.description}
           </Typography>
+          <Typography
+            sx={{
+              fontSize: "13px",
+              fontWeight: "bold",
+              marginBottom: "10px",
+            }}
+          >
+            Escolha uma data e horário
+          </Typography>
+          <CustomDatePicker handleNewDate={handleNewDate} />
           <Box display="flex" justifyContent="center" alignItems="center">
-            <CustomDatePicker handleNewDate={handleNewDate} />
             <Button
               sx={{
                 heigth: "20px",
@@ -266,8 +273,7 @@ const DashboardClient = () => {
               }}
               onClick={() => handleAddService()}
             >
-              <FaPlus />
-              <span>Agendar</span>
+              <FaPlus /> {" "}Agendar
             </Button>
           </Box>
         </Box>

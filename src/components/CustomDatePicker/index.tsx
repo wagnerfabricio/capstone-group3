@@ -28,6 +28,7 @@ const CustomDatePicker = ({ handleNewDate }: CustomDatePickerProps) => {
 
   return (
     <DatePicker
+      inline
       selected={startDate}
       filterDate={isWeekday}
       onChange={(date) => handleChange(date)}
