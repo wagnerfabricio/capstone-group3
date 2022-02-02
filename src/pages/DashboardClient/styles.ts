@@ -36,10 +36,6 @@ export const Header = styled.header`
     font-family: Arial, Helvetica, sans-serif;
   }
 
-  section {
-    padding: 7px;
-  }
-
   div {
     width: 70px;
     height: 70px;
