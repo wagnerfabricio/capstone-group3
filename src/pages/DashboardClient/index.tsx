@@ -207,16 +207,8 @@ const DashboardClient = () => {
 
         <Footer>
           <div>
-            <h3>Últimas sessões</h3>
-
-            <Card>
-              <p>24/01/2022</p>
-              <p>Massagem Corretora</p>
-            </Card>
-            <Card>
-              <p>24/01/2022</p>
-              <p>Massagem Corretora</p>
-            </Card>
+          <h3>Últimas sessões</h3>
+            <UserListInfo userServices={previousServices} />
           </div>
         </Footer>
 
@@ -273,7 +265,7 @@ const DashboardClient = () => {
               }}
               onClick={() => handleAddService()}
             >
-              <FaPlus /> {" "}Agendar
+              <FaPlus /> Agendar
             </Button>
           </Box>
         </Box>

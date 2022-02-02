@@ -36,10 +36,6 @@ export const Header = styled.header`
     font-family: Arial, Helvetica, sans-serif;
   }
 
-  section {
-    padding: 7px;
-  }
-
   div {
     width: 70px;
     height: 70px;
@@ -56,8 +52,21 @@ export const Header = styled.header`
   .footerDesktop {
     display: none;
   }
-
+  section{
+    /* padding: 0px 7px; */
+  }
+  @media (min-width: 500px) {
+    section{
+      padding: 10px;
+    }
+  }
+  /* @media (min-width: 740px) {
+    section{
+      padding: 10px;
+    }
+  } */
   @media (min-width: 1024px) {
+    margin-left: 10px;
     height: 90vh;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
@@ -67,7 +76,10 @@ export const Header = styled.header`
     justify-content: space-between;
     align-items: center;
     color: white;
+    padding: 10px 0;
+
     .divHeaderTitle {
+      background: transparent;
       margin: 0;
       width: 100%;
       height: 80px;
@@ -108,7 +120,16 @@ export const Header = styled.header`
         overflow-y: scroll;
         overflow-x: hidden;
         height: 40vh;
+        ::-webkit-scrollbar {
+          width: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+          /* background: linear-gradient(to bottom, #c9bc8e 0%, #B7A76A 100%); */
+          background: linear-gradient(to bottom, #fed066 0%, #fdb73d 100%);
+          border-radius: 6px;
+        }
       }
+
       li {
         border: 0px;
         width: 100%;
@@ -127,7 +148,7 @@ export const Header = styled.header`
   }
 `;
 export const Container = styled.div`
-  height: 82vh;
+  height: 85vh;
   width: auto;
   padding-top: 7px;
   margin: 10px;
@@ -140,7 +161,7 @@ export const Container = styled.div`
   flex-direction: column;
 
   .servicesList {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
   }
 
   .servicesList ul {
@@ -150,8 +171,8 @@ export const Container = styled.div`
     overflow-x: hidden;
     gap: 10px;
     width: 100%;
-    padding: 10px;
-    
+    padding: 0 10px;
+
     li {
       justify-content: space-between;
       padding: 10px;
@@ -184,6 +205,7 @@ export const Container = styled.div`
     color: #42918d;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
+    padding: 7px;
   }
   div {
     width: 90%;
@@ -204,10 +226,8 @@ export const Container = styled.div`
     display: flex;
     overflow-x: scroll;
     overflow-y: hidden;
-    *::-webkit-scrollbar {
-      width: 12px;
-    }
   }
+
   div {
     display: flex;
     flex-direction: row;
@@ -255,7 +275,7 @@ export const Container = styled.div`
   @media (min-width: 1024px) {
     height: 90vh;
     width: 40vw;
-    margin: 0px;
+    margin: 0;
     padding: 0;
     background-color: #f3f3f3e0;
     border-radius: 0;
@@ -266,8 +286,39 @@ export const Container = styled.div`
       width: 80%;
     }
     form {
+      height: 60px;
+      margin-bottom: 10px;
+
+      input {
+        margin-top: 0;
+      }
       button {
+        bottom: 7px;
         right: 5vw;
+      }
+    }
+    .servicesList {
+      margin-bottom: 0px;
+    }
+    .servicesList ul {
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #fed066 0%, #fdb73d 100%);
+        border-radius: 6px;
+      }
+    }
+    ul {
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        /* background: linear-gradient(to bottom, #c9bc8e 0%, #a89651 100%); */
+        /* background: linear-gradient(to bottom, #FED066 0%, #FDB73D 100%); */
+        /* background: linear-gradient(to bottom, #c2c2c2 0%, #b4b4b4 100%); */
+        background: linear-gradient(to bottom, #5fb6b2 0%, #42918d 100%);
+        border-radius: 6px;
       }
     }
     li {
@@ -277,31 +328,54 @@ export const Container = styled.div`
   @media (min-width: 1174px) {
     form {
       button {
-        right: 4vw;
+        right: 3.5vw;
+        margin-right: 15px;
       }
     }
   }
 `;
 export const Footer = styled.footer`
-  height: 25vh;
+  height: 35vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background: white;
+  padding-top: 5px;
+
   div {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    color: black;
+    border-radius: 0px;
+    height: 35vh;
+    margin: 0px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     width: 95%;
-    background-color: rgba(255, 255, 255, 0.842);
-    padding: 20px;
-    border-radius: 25px;
-  }
-  h3 {
-    color: #42918d;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  li{
-    width: 95%;
-    margin: 7px;
+
+    h3 {
+      color: #42918d;
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    ul {
+      padding: 10px;
+    }
+    li {
+      width: 100%;
+      margin: 7px auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
   }
   @media (min-width: 500px) {
     width: 70%;
@@ -310,6 +384,8 @@ export const Footer = styled.footer`
   @media (min-width: 740px) {
     width: 75%;
     margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 7px;
   }
   @media (min-width: 1024px) {
     display: none;
@@ -486,6 +562,7 @@ export const Input = styled.input`
 export const AsideRight = styled.aside`
   display: none;
   @media (min-width: 1024px) {
+    margin-right: 10px;
     display: inline;
     height: 90vh;
     width: 20%;
