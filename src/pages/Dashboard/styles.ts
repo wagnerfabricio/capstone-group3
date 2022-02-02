@@ -160,6 +160,7 @@ export const Content = styled.div`
     flex-direction: column;
     padding: 10px;
     gap: 10px;
+    overflow-y: scroll;
   }
 `;
 export const Lista = styled.li`
@@ -192,6 +193,16 @@ export const SearchContainer = styled.div`
     padding: 10px;
     gap: 10px;
   }
+  button {
+    border: none;
+    background: none;
+  }
+  li {
+    background-color: #80cbc4;
+    :hover {
+      background-color: #4db6ac;
+    }
+  }
 `;
 
 export const Pesquisa = styled.input`
@@ -212,10 +223,4 @@ export const ListaPesquisa = styled.li`
   height: 40px;
   border-radius: 50px;
   cursor: pointer;
-  &:nth-child(odd) {
-    background-color: rgba(66, 145, 141, 0.5);
-  }
-  &:nth-child(even) {
-    background-color: rgba(66, 145, 141, 0.2);
-  }
 `;
