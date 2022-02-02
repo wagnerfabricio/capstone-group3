@@ -40,7 +40,8 @@ interface AdminContextData {
   adminGetUsers: (accessToken: string) => Promise<void>;
   searchedUser: iUser[];
   adminSearchUser: (searchValue: string, searchType: string) => Promise<void>;
-
+  pickUser: iUser;
+  pickNewUser: (user: iUser) => void;
   adminServices: iService[];
   adminLoadingServices: boolean;
   adminGetServices: (accessToken: string) => Promise<void>;
@@ -63,6 +64,7 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
   const [users, setUsers] = useState<iUser[]>([]);
   const [adminLoadingUsers, setAdminLoadingUsers] = useState(true);
   const [searchedUser, setSearchedUser] = useState<iUser[]>([]);
+  const [pickUser, setPickUser] = useState<iUser>({} as iUser);
   const [adminServices, setAdminServices] = useState<iService[]>([]);
   const [adminLoadingServices, setAdminLoadingServices] = useState(true);
 
@@ -99,6 +101,10 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
     },
     []
   );
+
+  const pickNewUser = (user: iUser) => {
+    setPickUser(user);
+  };
 
   const adminGetServices = useCallback(async (accessToken: string) => {
     setAdminLoadingServices(true);
@@ -245,6 +251,8 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
         adminLoadingUsers,
         searchedUser,
         adminSearchUser,
+        pickUser,
+        pickNewUser,
         adminGetUsers,
         adminServices,
         adminLoadingServices,

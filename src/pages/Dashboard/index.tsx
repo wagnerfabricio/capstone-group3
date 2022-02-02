@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FiUser, FiCalendar } from "react-icons/fi";
 import { useAdmin } from "../../providers/Admin";
 import { useAuth } from "../../providers/Auth";
@@ -13,10 +13,37 @@ import {
   Aside,
 } from "./styles";
 import UserListInfo from "../../components/UserListInfo";
+import { useHistory } from "react-router-dom";
+
+interface iUser {
+  email: string;
+  name: string;
+  contact: string;
+  id: string;
+  cpf: number;
+  admin?: boolean;
+}
 
 const Dashboard = () => {
-  const { users, adminServices, adminGetServices, adminGetUsers } = useAdmin();
-  console.log(adminServices);
+  const { users, adminServices, adminGetServices, adminGetUsers, pickNewUser } =
+    useAdmin();
+
+  const [searchedUser, setSearchedUser] = useState<iUser[]>([]);
+
+  const history = useHistory();
+
+  const searchUser = (name: string) => {
+    const newUsers = users.filter((user) =>
+      user.name.toLowerCase().includes(name.toLowerCase())
+    );
+    setSearchedUser(newUsers);
+  };
+
+  const handleClick = (user: iUser) => {
+    pickNewUser(user);
+    history.push("/dashboardAdm");
+  };
+
   const { accessToken } = useAuth();
   const todayDate = new Date();
 
@@ -54,6 +81,10 @@ const Dashboard = () => {
     adminGetUsers(accessToken);
   }, []);
 
+  useEffect(() => {
+    setSearchedUser(users);
+  }, [users]);
+
   return (
     <Container>
       <PlannerContainer>
@@ -77,13 +108,17 @@ const Dashboard = () => {
           <UserListInfo services={adminServices} users={users} admin={true} />
         </Content>
         <SearchContainer>
-          <Pesquisa placeholder="Pesquisa de cliente..."></Pesquisa>
+          <Pesquisa
+            placeholder="Pesquisa de cliente..."
+            onChange={(e) => searchUser(e.target.value)}
+          />
           <ul>
             <h4>Lista de Pacientes</h4>
-            {users.map((element) => (
-              <ListaPesquisa>
-                <p>{element.name}</p>
-                <button>{element.name}</button>
+            {searchedUser.map((element) => (
+              <ListaPesquisa key={element.id}>
+                <button onClick={() => handleClick(element)}>
+                  <p>{element.name}</p>
+                </button>
               </ListaPesquisa>
             ))}
           </ul>
