@@ -54,8 +54,14 @@ interface AdminContextData {
     editedService: iService,
     accessToken: string
   ) => Promise<void>;
-  adminPayService: (serviceId: number, accessToken: string) => Promise<void>;
-  adminDoneService: (serviceId: number, accessToken: string) => Promise<void>;
+  adminPayService: (
+    serviceId: number | undefined,
+    accessToken: string
+  ) => Promise<void>;
+  adminDoneService: (
+    serviceId: number | undefined,
+    accessToken: string
+  ) => Promise<void>;
 }
 
 const AdminContext = createContext<AdminContextData>({} as AdminContextData);
@@ -177,7 +183,7 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
   );
 
   const adminPayService = useCallback(
-    async (serviceId: number, accessToken: string) => {
+    async (serviceId: number | undefined, accessToken: string) => {
       setAdminLoadingServices(true);
       await api
         .patch(
@@ -211,7 +217,7 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
   );
 
   const adminDoneService = useCallback(
-    async (serviceId: number, accessToken: string) => {
+    async (serviceId: number | undefined, accessToken: string) => {
       setAdminLoadingServices(true);
       await api
         .patch(

@@ -3,6 +3,7 @@ import { FiUser, FiCalendar } from "react-icons/fi";
 import { useAdmin } from "../../providers/Admin";
 import { useAuth } from "../../providers/Auth";
 import profileImage from "../../assets/images/profileImage.svg";
+import formatDate from "../../utils/formatDate";
 import {
   PlannerContainer,
   Content,
@@ -28,6 +29,8 @@ const Dashboard = () => {
   const { users, adminServices, adminGetServices, adminGetUsers, pickNewUser } =
     useAdmin();
 
+  const { user } = useAuth();
+
   const [searchedUser, setSearchedUser] = useState<iUser[]>([]);
 
   const history = useHistory();
@@ -47,34 +50,14 @@ const Dashboard = () => {
   const { accessToken } = useAuth();
   const todayDate = new Date();
 
-  const formatDate = (element: Date) => {
-    switch (element.getMonth()) {
-      case 0:
-        return "Janeiro";
-      case 1:
-        return "Fevereiro";
-      case 2:
-        return "Março";
-      case 3:
-        return "Abril";
-      case 4:
-        return "Maio";
-      case 5:
-        return "Junho";
-      case 6:
-        return "Julho";
-      case 7:
-        return "Agosto";
-      case 8:
-        return "Setembro";
-      case 9:
-        return "Outubro";
-      case 10:
-        return "Novembro";
-      case 11:
-        return "Dezembro";
-    }
-  };
+  const incomingServices = adminServices
+    .filter(
+      (service) => new Date(service.date).getMonth() === todayDate.getMonth()
+    )
+    .filter(
+      (service) => new Date(service.date).getDate() === todayDate.getDate()
+    )
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   useEffect(() => {
     adminGetServices(accessToken);
@@ -96,7 +79,7 @@ const Dashboard = () => {
                 Hoje, {todayDate.getDate()} de {formatDate(todayDate)}
               </b>
             </p>
-            <h2>Bom dia, Kenzinho!</h2>
+            <h2>Bom dia, {user.name}</h2>
           </section>
           <div>
             <img src={profileImage} alt="headerImage" />
@@ -104,16 +87,26 @@ const Dashboard = () => {
         </Aside>
         <Content>
           <h3>Planejamento do dia</h3>
-          <h5>Hora | Interagente | Procedimento | Realizado</h5>
-          <UserListInfo services={adminServices} users={users} admin={true} />
+          <div className="listHeaders">
+            <h4>Hora</h4>
+            <h4>Interagente</h4>
+            <h4>Procedimento</h4>
+
+            <h4>Realizado | Pago</h4>
+          </div>
+          <UserListInfo
+            services={incomingServices}
+            users={users}
+            admin={true}
+          />
         </Content>
         <SearchContainer>
           <Pesquisa
             placeholder="Pesquisa de cliente..."
             onChange={(e) => searchUser(e.target.value)}
           />
+          <h4>Lista de Pacientes</h4>
           <ul>
-            <h4>Lista de Pacientes</h4>
             {searchedUser.map((element) => (
               <ListaPesquisa key={element.id}>
                 <button onClick={() => handleClick(element)}>
