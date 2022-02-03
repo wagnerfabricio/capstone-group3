@@ -20,13 +20,18 @@ export const Header = styled.header`
   background-color: #98343c;
   height: 15vh;
   display: flex;
+
   justify-content: space-between;
   align-items: center;
   color: white;
 
-  span {
+  .divHeaderTitle {
     font-size: 0.9rem;
     font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
   }
   p {
     font-family: Arial, Helvetica, sans-serif;
@@ -112,7 +117,29 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
 
-  h3 {
+  form{
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+  .listHeaders {
+    display: flex;
+    justify-content: center;
+    width: 95%;
+    padding-bottom:20px;
+    text-align: left;
+    h4 {
+      margin: 0 5px;
+      font-size: small;
+      @media (min-width: 1000px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+
+  h3,h4 {
+    text-align: center;
     color: #42918d;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
@@ -156,7 +183,8 @@ export const Container = styled.div`
   }
 
   ul {
-    width: 80%;
+    width: 90%;
+    gap:10px;
     height: 230px;
     display: flex;
     flex-direction: column;
@@ -167,13 +195,16 @@ export const Container = styled.div`
     }
 
     li{
-      width:95%
+      width:98%;
+justify-content:space-evenly;
+
     }
+
 
   }
   @media (min-width: 500px) {
     height: 80vh;
-    width: 65%;
+    width: 90%;
     margin: 0 auto;
     margin-top: 20px;
     background-color: #f3f3f3e0;
@@ -229,6 +260,7 @@ export const Container = styled.div`
     }
     div {
       width: 80%;
+
     }
     .Services {
       flex-direction: row;
@@ -351,7 +383,6 @@ export const ServicesCard = styled.li`
 export const Input = styled.input`
   height: 4vh;
   width: 100%;
-  margin: 20px;
   background-color: white;
   border: 0.5px solid #42918d;
   border-radius: 15px;
