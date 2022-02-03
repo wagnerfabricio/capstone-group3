@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import CustomDatePicker from "../../components/CustomDatePicker";
 import { Lista } from "../../components/UserListInfo/styles";
+import { useHistory } from "react-router-dom";
 
 interface SearchData {
   title: string;
@@ -39,12 +40,13 @@ const DashboardAdm = () => {
     pickUser,
   } = useAdmin();
   const { products } = useProducts();
-  const { accessToken } = useAuth();
+  const { accessToken, signOut } = useAuth();
   const [open, setOpen] = useState(false);
   const [actualProd, setActualProd] = useState<iProduct>({} as iProduct);
   const { userGetServices, userServices } = useUserServices();
   const { register, handleSubmit } = useForm<SearchData>();
   const { searchProduct } = useProducts();
+  const history = useHistory();
 
   const [newDate, setNewDate] = useState<Date | null>(
     setHours(setMinutes(new Date(), 0), 9)
@@ -133,7 +135,29 @@ const DashboardAdm = () => {
         <Header>
           <div className="footerDesktop">
             <div className="divHeaderTitle">
-              <h3> Botões </h3>
+              <h3>Menu</h3>
+              <Button
+                sx={{
+                  backgroundColor: "#80CBC4",
+                  color: "white",
+                  padding: "10px 50px",
+                  margin: "5px",
+                }}
+                onClick={() => history.push("/dashboard")}
+              >
+                Anamnese
+              </Button>
+              <Button
+                sx={{
+                  backgroundColor: "#80CBC4",
+                  color: "white",
+                  padding: "10px 46px",
+                  margin: "5px",
+                }}
+                onClick={() => history.push("/dashboard")}
+              >
+                Dashboard
+              </Button>
             </div>
           </div>
 
@@ -176,12 +200,30 @@ const DashboardAdm = () => {
           <form>
             <h3>Próximas Sessões</h3>
           </form>
-          <UserListInfo services={adminServices} admin={true} />
+          <div className="listHeaders">
+            <h4>Data </h4>
+            <h4>Procedimento </h4>
+            <h4>Realizado | Pago </h4>
+          </div>
+          <UserListInfo
+            services={incomingServices}
+            admin={true}
+            userControl={true}
+          />
         </Container>
 
         <Container>
           <h3>Histórico de Sessões</h3>
-          <UserListInfo services={previousServices} admin={true} />
+          <div className="listHeaders">
+            <h4>Data </h4>
+            <h4>Procedimento </h4>
+            <h4>Realizado | Pago</h4>
+          </div>
+          <UserListInfo
+            services={previousServices}
+            admin={true}
+            userControl={true}
+          />
           <form onSubmit={handleSubmit(handleSearch)}>
             <Input
               placeholder="O que você gostaria de fazer hoje?"
