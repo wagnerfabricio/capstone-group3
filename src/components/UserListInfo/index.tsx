@@ -1,3 +1,5 @@
+import { useAdmin } from "../../providers/Admin";
+import { useAuth } from "../../providers/Auth";
 import { Lista } from "./styles";
 
 interface iService {
@@ -35,6 +37,9 @@ const UserListInfo = ({
   admin = false,
   userServices,
 }: UserListInfoProps) => {
+  const { adminPayService, adminDoneService } = useAdmin();
+  const { accessToken } = useAuth();
+
   if (admin) {
     return (
       <ul>
@@ -42,9 +47,15 @@ const UserListInfo = ({
           services.map((element) => {
             const fixDate = new Date(element.date);
             return (
-              <Lista>
+              <Lista key={element.id}>
                 <p>
-                  {fixDate.getHours()}:{fixDate.getUTCMinutes()} |
+                  {fixDate.getHours() > 9
+                    ? fixDate.getHours()
+                    : `0${fixDate.getHours()}`}
+                  :
+                  {fixDate.getMinutes() > 9
+                    ? fixDate.getMinutes()
+                    : `0${fixDate.getMinutes()}`}
                 </p>
                 <p>
                   {!!users &&
@@ -52,9 +63,26 @@ const UserListInfo = ({
                       .filter((user) => user.id === element.userId)
                       .map((element) => element.name)}
                 </p>
-                <p>{element.title} | </p>
-
-                <input name="isGoing" type="checkbox" />
+                <p>{element.title}</p>
+                {element.done ? (
+                  <input name="done" type="checkbox" checked />
+                ) : (
+                  <input
+                    name="done"
+                    type="checkbox"
+                    onClick={() => adminDoneService(element.id, accessToken)}
+                  />
+                )}
+                |
+                {element.payed ? (
+                  <input name="payed" type="checkbox" checked />
+                ) : (
+                  <input
+                    name="payed"
+                    type="checkbox"
+                    onClick={() => adminPayService(element.id, accessToken)}
+                  />
+                )}
               </Lista>
             );
           })}
@@ -68,7 +96,7 @@ const UserListInfo = ({
         userServices.map((element) => {
           const fixDate = new Date(element.date);
           return (
-            <Lista>
+            <Lista key={element.id}>
               <p>
                 {fixDate.getDate() > 9
                   ? fixDate.getDate()
