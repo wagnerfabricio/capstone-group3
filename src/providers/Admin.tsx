@@ -62,6 +62,31 @@ interface AdminContextData {
     serviceId: number | undefined,
     accessToken: string
   ) => Promise<void>;
+  adminAddAnamnesis: (
+    newAnamnesis: iAnamnesis | undefined,
+    userId: string,
+    accessToken: string
+  ) => Promise<void>;
+}
+
+interface iAnamnesis {
+  name: string;
+  birthday: string;
+  ocupation: string;
+  contact: string;
+  address: string;
+  rg: string;
+  cpf: string;
+  smoker: boolean;
+  circulatorydisorder: boolean;
+  practicephysicalactivity: boolean;
+  regularmenstrualcycle: boolean;
+  regularbowelfunctioning: boolean;
+  heartchanges: boolean;
+  hormonaldisorder: boolean;
+  hypohyperarterial: boolean;
+  pacemakercarrier: boolean;
+  varicoseveinsorinjury: boolean;
 }
 
 const AdminContext = createContext<AdminContextData>({} as AdminContextData);
@@ -73,6 +98,7 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
   const [pickUser, setPickUser] = useState<iUser>({} as iUser);
   const [adminServices, setAdminServices] = useState<iService[]>([]);
   const [adminLoadingServices, setAdminLoadingServices] = useState(true);
+  const [anamnesis, setAnamnesis] = useState<iAnamnesis[]>([]);
 
   const adminGetUsers = useCallback(async (accessToken: string) => {
     setAdminLoadingUsers(true);
@@ -250,6 +276,25 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
     [adminServices]
   );
 
+  const adminAddAnamnesis = useCallback(
+    async (newAnamnesis: iAnamnesis | undefined, userId: string, accessToken: string) => {
+      await api
+        .post(`/anamesis`, anamnesis, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((res) => {
+          setAnamnesis([...anamnesis, res.data]);
+        })
+        .catch((err) => {
+          toast.error("Ocorreu algum erro ao adicionar a Anamnese");
+          console.log(err);
+        });
+    },
+    [anamnesis]
+  );
+
   return (
     <AdminContext.Provider
       value={{
@@ -267,6 +312,7 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
         adminEditService,
         adminPayService,
         adminDoneService,
+        adminAddAnamnesis,
       }}
     >
       {children}
