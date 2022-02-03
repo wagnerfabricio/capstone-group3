@@ -3,7 +3,7 @@ import wallpaper from "../../assets/images/wallpaper.jpg";
 import asideDashImage from "../../assets/images/test1.svg";
 
 export const Background = styled.div`
-  height: 120vh;
+  height: 135vh;
   width: 100vw;
   box-sizing: border-box;
   background-image: url(${wallpaper});
@@ -25,6 +25,17 @@ export const Header = styled.header`
   align-items: center;
   color: white;
 
+  .divMenu {
+    margin-right: 5px;
+    height: 60px;
+    width: 60px;
+  }
+  .divMenu2 {
+    margin: 0;
+    background-color: transparent;
+    height: 60px;
+    width: 60px;
+  }
   span {
     font-size: 0.9rem;
     font-family: Arial, Helvetica, sans-serif;
@@ -52,19 +63,37 @@ export const Header = styled.header`
   .footerDesktop {
     display: none;
   }
-  section{
-    /* padding: 0px 7px; */
+  section {
+    margin-left: 7px;
   }
   @media (min-width: 500px) {
-    section{
+    section {
       padding: 10px;
+    }
+    .divMenu {
+      margin: 0;
+      height: 120px;
+      width: 120px;
+    }
+    .divMenu2 {
+      background-color: transparent;
+      height: 100px;
+      width: 150px;
     }
   }
-  /* @media (min-width: 740px) {
-    section{
-      padding: 10px;
+  @media (min-width: 500px) {
+    .divMenu {
+      margin-right: 10px;
+      height: 100px;
+      width: 100px;
     }
-  } */
+    .divMenu2 {
+      background-color: transparent;
+      height: 100px;
+      width: 150px;
+    }
+  }
+
   @media (min-width: 1024px) {
     margin-left: 10px;
     height: 90vh;
@@ -77,7 +106,16 @@ export const Header = styled.header`
     align-items: center;
     color: white;
     padding: 10px 0;
-
+    .divMenu {
+      margin-top: 10px;
+      height: 120px;
+      width: 120px;
+    }
+    .divMenu2 {
+      background-color: transparent;
+      height: 100px;
+      width: 150px;
+    }
     .divHeaderTitle {
       background: transparent;
       margin: 0;
@@ -124,7 +162,6 @@ export const Header = styled.header`
           width: 10px;
         }
         ::-webkit-scrollbar-thumb {
-          /* background: linear-gradient(to bottom, #c9bc8e 0%, #B7A76A 100%); */
           background: linear-gradient(to bottom, #fed066 0%, #fdb73d 100%);
           border-radius: 6px;
         }
@@ -177,7 +214,6 @@ export const Container = styled.div`
       justify-content: space-between;
       padding: 10px;
       background-color: white;
-      /* width: 97%; */
     }
     p {
       width: 50%;
@@ -201,11 +237,12 @@ export const Container = styled.div`
       align-items: center;
     }
   }
-  h3 {
+  h2 {
     color: #42918d;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     padding: 7px;
+    font-size: 1.2rem;
   }
   div {
     width: 90%;
@@ -233,7 +270,7 @@ export const Container = styled.div`
     flex-direction: row;
   }
   @media (min-width: 500px) {
-    height: 80vh;
+    height: 85vh;
     width: 65%;
     margin: 0 auto;
     margin-top: 20px;
@@ -253,7 +290,7 @@ export const Container = styled.div`
     }
   }
   @media (min-width: 740px) {
-    height: 80vh;
+    height: 85vh;
     width: 70%;
     margin: 0 auto;
     margin-top: 20px;
@@ -279,8 +316,10 @@ export const Container = styled.div`
     padding: 0;
     background-color: #f3f3f3e0;
     border-radius: 0;
-    h3 {
+    h2 {
       margin-top: 35px;
+      margin-bottom: 18px;
+      font-size: 1.5rem;
     }
     div {
       width: 80%;
@@ -314,9 +353,6 @@ export const Container = styled.div`
         width: 10px;
       }
       ::-webkit-scrollbar-thumb {
-        /* background: linear-gradient(to bottom, #c9bc8e 0%, #a89651 100%); */
-        /* background: linear-gradient(to bottom, #FED066 0%, #FDB73D 100%); */
-        /* background: linear-gradient(to bottom, #c2c2c2 0%, #b4b4b4 100%); */
         background: linear-gradient(to bottom, #5fb6b2 0%, #42918d 100%);
         border-radius: 6px;
       }
@@ -378,14 +414,16 @@ export const Footer = styled.footer`
     }
   }
   @media (min-width: 500px) {
-    width: 70%;
-    margin: 0 auto;
-  }
-  @media (min-width: 740px) {
-    width: 75%;
+    width: 65%;
     margin: 0 auto;
     margin-top: 20px;
-    border-radius: 7px;
+    border-radius: 15px;
+  }
+  @media (min-width: 740px) {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 15px;
   }
   @media (min-width: 1024px) {
     display: none;
@@ -572,5 +610,82 @@ export const AsideRight = styled.aside`
     margin: 0;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
+  }
+`;
+export const NotFoundService = styled.div`
+  width: 100%;
+  height: 35vh;
+  background-color: white;
+  border-radius: 15px;
+  margin: 10px;
+
+  section {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+
+    img {
+      height: 35vh;
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+    h3 {
+      color: black;
+    }
+    p {
+      color: #706f74;
+      font-size: 13px;
+      text-align: center;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    width: 90%;
+    height: 35vh;
+    background-color: white;
+    border-radius: 15px;
+    margin: 10px;
+
+    section {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+    }
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      text-align: center;
+
+      img {
+        height: 35vh;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        width: 110%;
+        background-size: cover;
+        background-position: center;
+      }
+      h3 {
+        color: black;
+      }
+      p {
+        color: #706f74;
+        font-size: 13px;
+        text-align: center;
+      }
+    }
   }
 `;

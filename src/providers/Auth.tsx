@@ -46,6 +46,11 @@ interface AuthContextData {
   signIn: (credentials: SignInCredentials) => Promise<void>;
   signUp: (signUpData: iSignUpData) => Promise<void>;
   signOut: () => void;
+  updateUser: (
+    signUpdata: iSignUpData,
+    accessToken: string,
+    userId: string
+  ) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -88,6 +93,33 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       });
   }, []);
 
+  const updateUser = useCallback(
+    async (signUpdata: iSignUpData, accessToken: string, userId: string) => {
+      await api
+        .patch(`/users/${userId}`, signUpdata, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          toast.success("Informações editadas com sucesso!");
+
+          localStorage.setItem("@massoterapia:accessToken", accessToken);
+          localStorage.setItem(
+            "@massoterapia:user",
+            JSON.stringify(response.data)
+          );
+
+          setData({ accessToken, user: response.data });
+        })
+        .catch((err) => {
+          toast.error("Tente novamente!");
+          console.log(err);
+        });
+    },
+    []
+  );
+
   const signOut = useCallback(() => {
     localStorage.removeItem("@massoterapia:accessToken");
     localStorage.removeItem("@massoterapia:user");
@@ -103,6 +135,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         signIn,
         signUp,
         signOut,
+        updateUser,
       }}
     >
       {children}

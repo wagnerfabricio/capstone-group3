@@ -57,7 +57,7 @@ const signInSchema = yup.object().shape({
     .oneOf([yup.ref("password"), null], "Senhas diferentes"),
 });
 
-const Login = () => {
+const Signup = () => {
   const [loading, setLoading] = useState(false);
   const { signUp } = useAuth();
 
@@ -190,4 +190,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

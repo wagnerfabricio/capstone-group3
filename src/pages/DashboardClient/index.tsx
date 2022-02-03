@@ -3,15 +3,13 @@ import {
   Header,
   Container,
   Footer,
-  Card,
   ServicesCard,
   Input,
   AsideRight,
+  NotFoundService,
 } from "./styles";
 
 import { FaPlus, FaSearch, FaTimes } from "react-icons/fa";
-import cardImage from "../../assets/images/cardImage.svg";
-import profileImage from "../../assets/images/profileImage.svg";
 import { useUserServices } from "../../providers/Services";
 import { useAuth } from "../../providers/Auth";
 import { useEffect, useState } from "react";
@@ -22,22 +20,13 @@ import setMinutes from "date-fns/setMinutes";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import CustomDatePicker from "../../components/CustomDatePicker";
 import UserListInfo from "../../components/UserListInfo";
+import notFoundService from "../../assets/images/notFoundService.gif";
+import MenuProfile from "./MenuProfile";
 
 interface SearchData {
   title: string;
 }
-interface iService {
-  id?: number;
-  prodId?: number;
-  userId: string;
-  title: string;
-  description: string;
-  url: string;
-  price: number;
-  date: string;
-  done: boolean;
-  payed: boolean;
-}
+
 interface iProduct {
   id?: number;
   prodId?: number;
@@ -162,17 +151,35 @@ const DashboardClient = () => {
               Você tem {incomingServices.length} compromisso(s) marcados.{" "}
             </span>
           </section>
-          <div>
-            <img src={cardImage} alt="headerImage" />
+          <div className="divMenu">
+            <MenuProfile />
           </div>
         </Header>
         <Container>
-          <h3>Agenda de tratamentos</h3>
-          <section className="servicesList">
-            <UserListInfo userServices={incomingServices} />
-          </section>
+          <h2>Agenda de tratamentos</h2>
+          {!incomingServices.length ? (
+            <>
+              <NotFoundService>
+                <section>
+                  <div>
+                    <h3>Você ainda não tem serviços agendados</h3>
+                    <p>Procure mais serviços abaixo.</p>
+                  </div>
+                  <div>
+                    <img src={notFoundService} alt="" />
+                  </div>
+                </section>
+              </NotFoundService>
+            </>
+          ) : (
+            <>
+              <section className="servicesList">
+                <UserListInfo userServices={incomingServices} />
+              </section>
+            </>
+          )}
 
-          <h3>Mais serviços</h3>
+          <h2>Mais serviços</h2>
           <form onSubmit={handleSubmit(handleSearch)}>
             <Input
               placeholder="O que você gostaria de fazer hoje?"
@@ -207,7 +214,7 @@ const DashboardClient = () => {
 
         <Footer>
           <div>
-          <h3>Últimas sessões</h3>
+            <h3>Últimas sessões</h3>
             <UserListInfo userServices={previousServices} />
           </div>
         </Footer>
@@ -264,8 +271,15 @@ const DashboardClient = () => {
                 },
               }}
               onClick={() => handleAddService()}
+              startIcon={
+                <FaPlus
+                  style={{
+                    fontSize: "small",
+                  }}
+                />
+              }
             >
-              <FaPlus /> Agendar
+              Agendar
             </Button>
           </Box>
         </Box>
