@@ -134,7 +134,7 @@ const DashboardAdm = () => {
     adminGetUsers(accessToken);
     adminGetServices(accessToken);
     userGetServices(pickUser.id);
-  }, [pickUser.id]);
+  }, [pickUser.id, userServices]);
 
   return (
     <>
