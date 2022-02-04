@@ -143,7 +143,7 @@ const DashboardAdm = () => {
                   padding: "10px 50px",
                   margin: "5px",
                 }}
-                onClick={() => history.push("/dashboard")}
+                onClick={() => history.push("/anamnese")}
               >
                 Anamnese
               </Button>

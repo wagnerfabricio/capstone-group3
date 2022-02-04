@@ -7,6 +7,7 @@ import About from "../pages/About";
 import { AnimatePresence } from "framer-motion";
 import DashboardClient from "../pages/DashboardClient";
 import DashboardAdm from "../pages/Dashboard2";
+import Anamnese from "../components/Anamnese";
 import PageNotFound from "../pages/PageNotFound";
 
 const Routes = () => {
@@ -20,6 +21,7 @@ const Routes = () => {
         <Route component={DashboardAdm} path="/dashboardAdm" />
         <Route component={DashboardClient} path="/dashboardClient" />
         <Route component={About} path="/about" />
+        <Route component={Anamnese} path="/anamnese" />
         <Route component={PageNotFound} />
       </Switch>
     </AnimatePresence>
