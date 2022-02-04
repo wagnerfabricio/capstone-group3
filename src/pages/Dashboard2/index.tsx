@@ -1,4 +1,11 @@
-import { Background, Header, Container, ServicesCard, Input } from "./styles";
+import {
+  Background,
+  Header,
+  Container,
+  ServicesCard,
+  Input,
+  Lista,
+} from "./styles";
 import { FaPlus, FaTimes } from "react-icons/fa";
 import cardImage from "../../assets/images/cardImage.svg";
 import { useEffect, useState } from "react";
@@ -12,7 +19,7 @@ import { useUserServices } from "../../providers/Services";
 import { useForm } from "react-hook-form";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import CustomDatePicker from "../../components/CustomDatePicker";
-import { Lista } from "../../components/UserListInfo/styles";
+
 import { useHistory } from "react-router-dom";
 
 interface SearchData {
@@ -163,11 +170,9 @@ const DashboardAdm = () => {
 
           <section>
             <p>
-              <b>
-                Hoje, {todayDate.getDate()} de {formatDate(todayDate)}
-              </b>
+              Hoje, {todayDate.getDate()} de {formatDate(todayDate)}
             </p>
-            <h2>Cliente: {pickUser.name}!</h2>
+            <h2>{pickUser.name}!</h2>
             <span>
               Serviços: {incomingServices.length} compromisso(s) marcados.{" "}
             </span>
@@ -176,10 +181,11 @@ const DashboardAdm = () => {
             <img src={cardImage} alt="headerImage" />
           </div>
         </Header>
+
         <Container>
-          <h3>Dados do usuário</h3>
-          <ul>
-            <>
+          <div className="content1">
+            <h3>Dados do usuário</h3>
+            <ul>
               <Lista>
                 <p>Nome: {pickUser.name} </p>
               </Lista>
@@ -195,62 +201,68 @@ const DashboardAdm = () => {
               <Lista>
                 <p>ID: {pickUser.id} </p>
               </Lista>
-            </>
-          </ul>
-          <form>
-            <h3>Próximas Sessões</h3>
-          </form>
-          <div className="listHeaders">
-            <h4>Data </h4>
-            <h4>Procedimento </h4>
-            <h4>Realizado | Pago </h4>
+            </ul>
           </div>
-          <UserListInfo
-            services={incomingServices}
-            admin={true}
-            userControl={true}
-          />
+          <div className="content2">
+            <h3>Próximas Sessões</h3>
+            <div className="listHeaders1">
+              <h4>Data </h4>
+              <h4>Procedimento </h4>
+              <h4>Realizado | Pago </h4>
+            </div>
+            <UserListInfo
+              services={incomingServices}
+              admin={true}
+              userControl={true}
+            />
+          </div>
         </Container>
 
-        <Container>
-          <h3>Histórico de Sessões</h3>
-          <div className="listHeaders">
-            <h4>Data </h4>
-            <h4>Procedimento </h4>
-            <h4>Realizado | Pago</h4>
-          </div>
-          <UserListInfo
-            services={previousServices}
-            admin={true}
-            userControl={true}
-          />
-          <form onSubmit={handleSubmit(handleSearch)}>
-            <Input
-              placeholder="O que você gostaria de fazer hoje?"
-              {...register("title")}
+        <Container className="set">
+          <div className="content3">
+            <h3>Histórico de Sessões</h3>
+            <div className="listHeaders2">
+              <h4>Data </h4>
+              <h4>Procedimento </h4>
+              <h4>Realizado</h4>
+              <h4>Pago</h4>
+            </div>
+            <UserListInfo
+              services={previousServices}
+              admin={true}
+              userControl={true}
             />
-            <button type="submit"></button>
-          </form>
-          <ul className="Services">
-            {!products.length ? (
-              <div>Não encontrado</div>
-            ) : (
-              products.map((item) => {
-                return (
-                  <ServicesCard key={item.id}>
-                    <div>
-                      <img src={item.url} alt="cardimage" />
+          </div>
+          <div className="content4">
+            <form onSubmit={handleSubmit(handleSearch)}>
+              <Input
+                placeholder="O que você gostaria de fazer hoje?"
+                {...register("title")}
+              />
+              <button type="submit"></button>
+            </form>
 
-                      <h6>{item.title}</h6>
-                      <button onClick={() => handleOpenModal(item)}>
-                        <FaPlus />
-                      </button>
-                    </div>
-                  </ServicesCard>
-                );
-              })
-            )}
-          </ul>
+            <ul className="Services">
+              {!products.length ? (
+                <div>Não encontrado</div>
+              ) : (
+                products.map((item) => {
+                  return (
+                    <ServicesCard key={item.id}>
+                      <div>
+                        <img src={item.url} alt="cardimage" />
+
+                        <h6>{item.title}</h6>
+                        <button onClick={() => handleOpenModal(item)}>
+                          <FaPlus />
+                        </button>
+                      </div>
+                    </ServicesCard>
+                  );
+                })
+              )}
+            </ul>
+          </div>
         </Container>
       </Background>
       <Modal open={open}>
