@@ -43,7 +43,7 @@ const signInSchema = yup.object().shape({
     .required("Digite seu telefone")
     .test("Min 11 dígitos", "Telefeno inválido", (val) => !val?.includes("_")),
   email: yup.string().required("Email obrigatório").email("Email inválido"),
-  password: yup.string().required("Senha obrigatória"),
+  password: yup.string().required("Digite sua senha para alterar"),
 });
 
 interface UpdateClientProps {
@@ -64,8 +64,9 @@ const UpdateClient = ({ setOpenModal }: UpdateClientProps) => {
 
   const handleSignIn = (data: SignInData) => {
     delete data.confirm_password;
+
     updateUser(data, accessToken, user.id);
-    setOpenModal(false)
+    setOpenModal(false);
   };
 
   return (
@@ -91,13 +92,18 @@ const UpdateClient = ({ setOpenModal }: UpdateClientProps) => {
         <TextField
           fullWidth
           autoComplete="name"
+          defaultValue={user.name}
           label={!!errors.name ? errors.name.message : "Nome Completo"}
           variant="outlined"
           {...register("name")}
           error={!!errors.name}
         />
 
-        <InputMask mask="999.999.999-99" defaultValue="" {...register("cpf")}>
+        <InputMask
+          mask="999.999.999-99"
+          defaultValue={user.cpf}
+          {...register("cpf")}
+        >
           {(inputProps: any, ref: any) => {
             return (
               <TextField
@@ -115,7 +121,7 @@ const UpdateClient = ({ setOpenModal }: UpdateClientProps) => {
 
         <InputMask
           mask="(99) 99999-9999"
-          defaultValue=""
+          defaultValue={user.contact}
           {...register("contact")}
         >
           {(inputProps: any) => {
@@ -135,6 +141,7 @@ const UpdateClient = ({ setOpenModal }: UpdateClientProps) => {
         <TextField
           fullWidth
           autoComplete="email"
+          defaultValue={user.email}
           label={!!errors.email ? errors.email.message : "Email"}
           variant="outlined"
           {...register("email")}

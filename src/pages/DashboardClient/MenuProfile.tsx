@@ -7,12 +7,14 @@ import { useState } from "react";
 import { Box, Button, Modal, ListItemIcon } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import UpdateClient from "./updateClient";
+import { useAuth } from "../../providers/Auth";
 
 const MenuProfile = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const history = useHistory();
+  const { signOut } = useAuth();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -23,7 +25,7 @@ const MenuProfile = () => {
 
   const handleLogout = () => {
     setAnchorEl(null);
-    localStorage.clear();
+    signOut();
     history.push("/");
   };
   const handleModal = () => {

@@ -3,6 +3,7 @@ import { useAdmin } from "../../providers/Admin";
 import { useAuth } from "../../providers/Auth";
 import profileImage from "../../assets/images/profileImage.svg";
 import formatDate from "../../utils/formatDate";
+import { FaSignOutAlt } from "react-icons/fa";
 import {
   PlannerContainer,
   Content,
@@ -14,6 +15,7 @@ import {
 } from "./styles";
 import UserListInfo from "../../components/UserListInfo";
 import { useHistory } from "react-router-dom";
+import { Button } from "@mui/material";
 
 interface iUser {
   email: string;
@@ -35,7 +37,7 @@ const Dashboard = () => {
     pickUser,
   } = useAdmin();
 
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
 
   const [searchedUser, setSearchedUser] = useState<iUser[]>([]);
 
@@ -50,6 +52,7 @@ const Dashboard = () => {
 
   const handleClick = (user: iUser) => {
     pickNewUser(user);
+    adminGetAnamnesis(pickUser.id, accessToken);
     history.push("/dashboardAdm");
   };
 
@@ -90,6 +93,9 @@ const Dashboard = () => {
           <div>
             <img src={profileImage} alt="headerImage" />
           </div>
+          <Button variant="outlined" style={{border: "none"}} startIcon={<FaSignOutAlt />} onClick={signOut}>
+            Sair
+          </Button>
         </Aside>
         <Content>
           <h3>Planejamento do dia</h3>

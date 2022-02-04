@@ -108,10 +108,6 @@ const Anamnese = () => {
     adminAddAnamnesis(newData, pickUser.id, accessToken);
   };
 
-  useEffect(() => {
-    adminGetAnamnesis(pickUser.id, accessToken);
-  }, [pickUser.id, accessToken, adminGetAnamnesis]);
-
   return (
     <Container>
       <Form onSubmit={handleSubmit(handleSubmitAnamnese)}>
