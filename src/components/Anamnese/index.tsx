@@ -256,7 +256,7 @@ const Anamnese = () => {
 
           <FormControlLabel
             value="start"
-            label="É fumante?"
+            label="Pratica atividade física?"
             control={
               <Controller
                 name="practicePhysicalActivity"
