@@ -177,6 +177,8 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
         )
         .then((res) => {
           setAdminServices([...adminServices, res.data]);
+          toast.success("Serviço adicionado com sucesso!");
+
         })
         .catch((err) => {
           toast.error("Ocorreu algum erro ao editar o serviço");
