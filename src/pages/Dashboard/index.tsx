@@ -50,7 +50,6 @@ const Dashboard = () => {
 
   const handleClick = (user: iUser) => {
     pickNewUser(user);
-    adminGetAnamnesis(pickUser.id, accessToken);
     history.push("/dashboardAdm");
   };
 

@@ -293,7 +293,7 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
         })
         .then((res) => {
           setAnamnesis([...anamnesis, res.data]);
-          console.log(anamnesis);
+          toast.success("Anamnese adicionada/alterada com sucesso!");
         })
         .catch((err) => {
           toast.error("Ocorreu algum erro ao adicionar a Anamnese");
@@ -319,6 +319,7 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
           console.log(err);
         });
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [anamnesis]
   );
 
