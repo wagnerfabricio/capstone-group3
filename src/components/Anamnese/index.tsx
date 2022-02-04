@@ -82,10 +82,11 @@ const anamneseSchema = yup.object().shape({
   varicoseVeinsOrInjury: yup.boolean(),
 });
 
-const Anamnese = ({ user }: AnamneseProps) => {
+const Anamnese = () => {
   const [loading, setLoading] = useState(false);
 
-  const { pickUser, anamnesis, adminAddAnamnesis } = useAdmin();
+  const { pickUser, anamnesis, adminAddAnamnesis, adminGetAnamnesis } =
+    useAdmin();
   const { accessToken } = useAuth();
 
   const userAnamnesis = anamnesis.filter(
@@ -106,6 +107,10 @@ const Anamnese = ({ user }: AnamneseProps) => {
 
     adminAddAnamnesis(newData, pickUser.id, accessToken);
   };
+
+  useEffect(() => {
+    adminGetAnamnesis(pickUser.id, accessToken);
+  }, [pickUser.id, accessToken, adminGetAnamnesis]);
 
   return (
     <Container>
