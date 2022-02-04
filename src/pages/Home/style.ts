@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   height: auto;
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,7 +17,7 @@ export const Container = styled.div`
     padding: 20px;
   }
   main {
-    width: 100vw;
+    width: 100%;
   }
   header {
     display: flex;
