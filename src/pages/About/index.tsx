@@ -4,35 +4,41 @@ import { Button } from "@mui/material";
 import { TiArrowBack } from "react-icons/ti";
 import { useHistory } from "react-router-dom";
 
+import foster from '../../assets/images/foster.gif'
+import rego from '../../assets/images/rego.gif'
+import luiz from '../../assets/images/luiz.gif'
+import bruno from '../../assets/images/bruno.gif'
+import vagner from '../../assets/images/vagner.gif'
+
 const group = [
   {
     name: "Felipe Foster",
     duty: "Quality Assurance",
-    image: "http://i.share.pho.to/93b597d4_o.gif",
+    image: foster,
     git: "https://github.com/felipefoster",
   },
   {
     name: "Rêgo Falcão",
     duty: "Scrum Master",
-    image: "http://i.share.pho.to/9c3a7dad_o.gif",
+    image: rego,
     git: "https://github.com/regofalcao",
   },
   {
     name: "Bruno Faria",
     duty: "Product Owner",
-    image: "http://i.share.pho.to/4769ca66_o.gif",
+    image: bruno,
     git: "https://github.com/BrunoFaria93",
   },
   {
     name: "Luiz Paulo",
     duty: "Quality Assurance",
-    image: "http://i.share.pho.to/cd08101a_o.gif",
+    image: luiz,
     git: "https://github.com/luizpcardoso",
   },
   {
     name: "Vagner Fabricio",
     duty: "Tech Leader",
-    image: "http://i.share.pho.to/e52eb5df_o.gif",
+    image: vagner,
     git: "https://github.com/wagnerfabricio",
   },
 ];
