@@ -19,8 +19,6 @@ const CustomDatePicker = ({ handleNewDate }: CustomDatePickerProps) => {
     return day !== 0 && day !== 6;
   };
 
-  console.log(startDate);
-
   const handleChange = (date: Date | null) => {
     setStartDate(date);
     handleNewDate(date);
