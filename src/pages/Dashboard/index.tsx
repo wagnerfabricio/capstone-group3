@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FiUser, FiCalendar } from "react-icons/fi";
 import { useAdmin } from "../../providers/Admin";
 import { useAuth } from "../../providers/Auth";
 import profileImage from "../../assets/images/profileImage.svg";
@@ -26,8 +25,15 @@ interface iUser {
 }
 
 const Dashboard = () => {
-  const { users, adminServices, adminGetServices, adminGetUsers, pickNewUser } =
-    useAdmin();
+  const {
+    users,
+    adminServices,
+    adminGetServices,
+    adminGetUsers,
+    pickNewUser,
+    adminGetAnamnesis,
+    pickUser,
+  } = useAdmin();
 
   const { user } = useAuth();
 
@@ -44,6 +50,7 @@ const Dashboard = () => {
 
   const handleClick = (user: iUser) => {
     pickNewUser(user);
+    adminGetAnamnesis(pickUser.id, accessToken);
     history.push("/dashboardAdm");
   };
 

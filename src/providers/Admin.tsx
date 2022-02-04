@@ -34,6 +34,27 @@ interface iService {
   payed: boolean;
 }
 
+interface iAnamnesis {
+  userId?: string;
+  name: string;
+  birthday: string;
+  ocupation: string;
+  contact: string;
+  address: string;
+  rg: string;
+  cpf: string;
+  smoker: boolean;
+  circulatoryDisorder: boolean;
+  practicePhysicalActivity: boolean;
+  regularMenstrualCycle: boolean;
+  regularBowelFunctioning: boolean;
+  heartChanges: boolean;
+  hormonalDisorder: boolean;
+  hypoHyperArterial: boolean;
+  pacemakerCarrier: boolean;
+  varicoseVeinsOrInjury: boolean;
+}
+
 interface AdminContextData {
   users: iUser[];
   adminLoadingUsers: boolean;
@@ -62,31 +83,13 @@ interface AdminContextData {
     serviceId: number | undefined,
     accessToken: string
   ) => Promise<void>;
+  anamnesis: iAnamnesis[];
   adminAddAnamnesis: (
     newAnamnesis: iAnamnesis | undefined,
     userId: string,
     accessToken: string
   ) => Promise<void>;
-}
-
-interface iAnamnesis {
-  name: string;
-  birthday: string;
-  ocupation: string;
-  contact: string;
-  address: string;
-  rg: string;
-  cpf: string;
-  smoker: boolean;
-  circulatorydisorder: boolean;
-  practicephysicalactivity: boolean;
-  regularmenstrualcycle: boolean;
-  regularbowelfunctioning: boolean;
-  heartchanges: boolean;
-  hormonaldisorder: boolean;
-  hypohyperarterial: boolean;
-  pacemakercarrier: boolean;
-  varicoseveinsorinjury: boolean;
+  adminGetAnamnesis: (userId: string, accessToken: string) => Promise<void>;
 }
 
 const AdminContext = createContext<AdminContextData>({} as AdminContextData);
@@ -277,15 +280,39 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
   );
 
   const adminAddAnamnesis = useCallback(
-    async (newAnamnesis: iAnamnesis | undefined, userId: string, accessToken: string) => {
+    async (
+      newAnamnesis: iAnamnesis | undefined,
+      userId: string,
+      accessToken: string
+    ) => {
       await api
-        .post(`/anamesis`, anamnesis, {
+        .post(`/anamnesis`, newAnamnesis, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         })
         .then((res) => {
           setAnamnesis([...anamnesis, res.data]);
+          console.log(anamnesis);
+        })
+        .catch((err) => {
+          toast.error("Ocorreu algum erro ao adicionar a Anamnese");
+          console.log(err);
+        });
+    },
+    [anamnesis]
+  );
+
+  const adminGetAnamnesis = useCallback(
+    async (userId: string, accessToken: string) => {
+      await api
+        .get(`/anamnesis`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((res) => {
+          setAnamnesis(res.data);
         })
         .catch((err) => {
           toast.error("Ocorreu algum erro ao adicionar a Anamnese");
@@ -312,7 +339,9 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
         adminEditService,
         adminPayService,
         adminDoneService,
+        anamnesis,
         adminAddAnamnesis,
+        adminGetAnamnesis,
       }}
     >
       {children}
