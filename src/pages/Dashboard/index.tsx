@@ -16,6 +16,7 @@ import {
 import UserListInfo from "../../components/UserListInfo";
 import { useHistory } from "react-router-dom";
 import { Button } from "@mui/material";
+import MenuProfile from "../DashboardClient/MenuProfile";
 
 interface iUser {
   email: string;
@@ -91,11 +92,16 @@ const Dashboard = () => {
             <h2>Bom dia, {user.name}</h2>
           </section>
           <div>
-            <img src={profileImage} alt="headerImage" />
+            <MenuProfile />
           </div>
-          <Button variant="outlined" style={{border: "none"}} startIcon={<FaSignOutAlt />} onClick={signOut}>
+          {/* <Button
+            variant="outlined"
+            style={{ border: "none" }}
+            startIcon={<FaSignOutAlt />}
+            onClick={signOut}
+          >
             Sair
-          </Button>
+          </Button> */}
         </Aside>
         <Content>
           <h3>Planejamento do dia</h3>
