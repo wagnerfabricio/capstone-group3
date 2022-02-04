@@ -251,7 +251,7 @@ export const AdminProvider = ({ children }: AdminProviderProps) => {
       await api
         .patch(
           `/services/${serviceId}`,
-          { payed: true },
+          { done: true },
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
