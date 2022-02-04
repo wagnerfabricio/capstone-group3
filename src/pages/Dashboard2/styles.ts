@@ -103,6 +103,9 @@ export const Header = styled.header`
         width: 70px;
       }
     }
+    .divMenu2{
+      background-color: transparent;
+    }
     .footerDesktop {
       width: 180px;
       height: 400px;

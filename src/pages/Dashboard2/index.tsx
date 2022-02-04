@@ -22,6 +22,7 @@ import CustomDatePicker from "../../components/CustomDatePicker";
 import { FaSearch } from "react-icons/fa";
 
 import { useHistory } from "react-router-dom";
+import MenuProfile2 from "../DashboardClient/MenuProfile2";
 
 interface SearchData {
   title: string;
@@ -154,6 +155,9 @@ const DashboardAdm = () => {
                   color: "white",
                   padding: "10px 50px",
                   margin: "5px",
+                  "&:hover": {
+                    backgroundColor: "#367673",
+                  },
                 }}
                 onClick={() => {
                   const searchEmpty = "";
@@ -169,6 +173,9 @@ const DashboardAdm = () => {
                   color: "white",
                   padding: "10px 46px",
                   margin: "5px",
+                  "&:hover": {
+                    backgroundColor: "#367673",
+                  },
                 }}
                 onClick={() => history.push("/dashboard")}
               >
@@ -186,8 +193,8 @@ const DashboardAdm = () => {
               Serviços: {incomingServices.length} compromisso(s) marcados.{" "}
             </span>
           </section>
-          <div onClick={() => history.push("/dashboard")}>
-            <img src={cardImage} alt="headerImage" />
+          <div>
+            <MenuProfile2 />
           </div>
         </Header>
 

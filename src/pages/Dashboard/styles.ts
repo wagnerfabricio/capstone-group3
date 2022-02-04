@@ -137,6 +137,9 @@ export const Aside = styled.header`
       img {
         width: 70px;
       }
+      .divMenu2{
+        background-color: transparent;
+      }
     }
     .footerDesktop {
       width: 280px;
