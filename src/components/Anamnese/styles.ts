@@ -68,5 +68,9 @@ export const Form = styled.form`
       grid-template-columns: 1fr 1fr 1fr;
       grid-column-gap: 20px;
     }
+    button{
+      width: 50%;
+      margin: 0 auto;
+    }
   }
 `;
