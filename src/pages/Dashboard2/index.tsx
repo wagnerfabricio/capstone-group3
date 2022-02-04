@@ -177,7 +177,7 @@ const DashboardAdm = () => {
               Serviços: {incomingServices.length} compromisso(s) marcados.{" "}
             </span>
           </section>
-          <div>
+          <div onClick={() => history.push("/dashboard")}>
             <img src={cardImage} alt="headerImage" />
           </div>
         </Header>
