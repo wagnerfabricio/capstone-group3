@@ -144,6 +144,13 @@ export const Container = styled.div`
   form {
     width: 90%;
     margin-bottom: 20px;
+
+    button {
+      margin-left: -30px;
+      background: transparent;
+      color: #42918d;
+      border: none;
+    }
   }
 
   .listHeaders1 {
