@@ -19,6 +19,7 @@ import { useUserServices } from "../../providers/Services";
 import { useForm } from "react-hook-form";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import CustomDatePicker from "../../components/CustomDatePicker";
+import { FaSearch } from "react-icons/fa";
 
 import { useHistory } from "react-router-dom";
 
@@ -46,7 +47,7 @@ const DashboardAdm = () => {
     adminAddService,
     pickUser,
   } = useAdmin();
-  const { products } = useProducts();
+  const { products, getProducts } = useProducts();
   const { accessToken, signOut } = useAuth();
   const [open, setOpen] = useState(false);
   const [actualProd, setActualProd] = useState<iProduct>({} as iProduct);
@@ -136,6 +137,10 @@ const DashboardAdm = () => {
     userGetServices(pickUser.id);
   }, [pickUser.id, userServices]);
 
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <>
       <Background>
@@ -150,7 +155,11 @@ const DashboardAdm = () => {
                   padding: "10px 50px",
                   margin: "5px",
                 }}
-                onClick={() => history.push("/anamnese")}
+                onClick={() => {
+                  const searchEmpty = "";
+                  searchProduct(searchEmpty, accessToken);
+                  history.push("/anamnese");
+                }}
               >
                 Anamnese
               </Button>
@@ -239,7 +248,9 @@ const DashboardAdm = () => {
                 placeholder="O que você gostaria de fazer hoje?"
                 {...register("title")}
               />
-              <button type="submit"></button>
+              <button type="submit">
+                <FaSearch />
+              </button>
             </form>
 
             <ul className="Services">
