@@ -1,46 +1,44 @@
-# Getting Started with Create React App
+# Adminstrador de Clinica
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Foi feito pra gerenciar uma clínica de massoterapia.
 
-## Available Scripts
+# Usuário
+Pode criar contar, logar e agendar massagens de acordo com o catálogo além de poder ver um histórico com as sessões que já aconteceram ou irão acontecer. 
 
-In the project directory, you can run:
+# Admin
+Pode ver todas as massagens agendadas do dia. 
+Editar Massagens.
+Adicionar Novas Massagens para Usuários.
+Ver histórico do cliente passado e futuro.
+Ver dados do cliente.
+Ver editar e cadastrar Anamnese do Cliente.
 
-### `yarn start`
+# Ferramentas para desenvolvimento:
+    - React
+    - Context
+    - TypeScript
+    - Fake api com JSON
+    
+# Bibliotecas:
+- axios
+- React hook form com Yup e Hookform Resolvers
+- React router dom 5 incluindo Types para react router dom
+- React icons
+- Material ui com Types para material-ui
+- Styled components com Ttypes para styled components
+- Framer motion
+- React toastify
+- react-input-mask e @types/react-input-mask
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Tela de Login:
+![Captura de tela de 2022-02-07 12-57-41](https://user-images.githubusercontent.com/64864720/152824658-e8029d63-2976-4602-9cd6-c02272055d93.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
+Tela Dashboard Adm:
+![Captura de tela de 2022-02-07 12-58-37](https://user-images.githubusercontent.com/64864720/152824692-332eef83-f497-4f17-8299-decd8d882095.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+Tela Dashboard Cliente:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Captura de tela de 2022-02-07 12-59-33](https://user-images.githubusercontent.com/64864720/152824759-e1525aa5-5192-49f7-8a00-438d22f35fbe.png)
+![Captura de tela de 2022-02-07 12-59-40](https://user-images.githubusercontent.com/64864720/152824766-3a9de88e-cf3b-4120-ab38-d1744b829ba4.png)
